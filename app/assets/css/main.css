@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: 'Public Sans', sans-serif;
+
+  --color-green-50: #EFFDF5;
+  --color-green-100: #D9FBE8;
+  --color-green-200: #B3F5D1;
+  --color-green-300: #75EDAE;
+  --color-green-400: #00DC82;
+  --color-green-500: #00C16A;
+  --color-green-600: #00A155;
+  --color-green-700: #007F45;
+  --color-green-800: #016538;
+  --color-green-900: #0A5331;
+  --color-green-950: #052E16;
+}
+
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
+  }
+
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+@layer utilities {
+  /* Fade animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Slide animations */
+  @keyframes slide-in-from-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-from-left {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out-to-right {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+  }
+
+  /* Smooth transitions */
+  .animate-in {
+    animation-fill-mode: both;
+  }
+
+  .animate-out {
+    animation-fill-mode: both;
+  }
+
+  .fade-in {
+    animation: fade-in 0.3s ease-in-out;
+  }
+
+  .fade-out {
+    animation: fade-out 0.2s ease-in-out;
+  }
+
+  .slide-in-from-right {
+    animation: slide-in-from-right 0.3s ease-in-out;
+  }
+
+  .slide-in-from-left {
+    animation: slide-in-from-left 0.3s ease-in-out;
+  }
+
+  .slide-out-to-right {
+    animation: slide-out-to-right 0.2s ease-in-out;
+  }
+
+  /* Navigation optimization */
+  .nav-item-active {
+    @apply relative bg-red-600 text-white shadow-md shadow-red-900/40;
+  }
+
+  .nav-item-inactive {
+    @apply relative text-gray-400 hover:text-white hover:bg-gray-900/40;
+  }
+}
