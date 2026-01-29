@@ -28,7 +28,7 @@ Application moderne de gestion et de suivi des statistiques de combattants UFC, 
 
 ```bash
 # Cloner le repository
-git clone <votre-repo-url>
+git clone https://github.com/amadoudiop04/webfrontavancefilerouge-vue.git
 
 # Installer les dépendances
 pnpm install
@@ -74,6 +74,13 @@ pnpm typecheck        # Vérifier les types TypeScript
 # Autres
 pnpm postinstall      # Préparer Nuxt après installation
 ```
+
+## Notez bien 
+```
+Pour tester les fonctionnalités du mode admin assure vous d'acceder au 
+fichier ath.js dans store puis assure toi de changer la valeur du variable isAdmin en true .
+-->  isAdmin: true
+
 
  ## Retrouvez moi sur linkedin
  https://www.linkedin.com/in/amadou-diop-3a5258316/

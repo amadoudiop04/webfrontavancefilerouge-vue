@@ -28,7 +28,6 @@
 }
 
 @layer utilities {
-  /* Fade animations */
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -81,7 +80,6 @@
     }
   }
 
-  /* Smooth transitions */
   .animate-in {
     animation-fill-mode: both;
   }
@@ -110,7 +108,6 @@
     animation: slide-out-to-right 0.2s ease-in-out;
   }
 
-  /* Navigation optimization */
   .nav-item-active {
     @apply relative bg-red-600 text-white shadow-md shadow-red-900/40;
   }

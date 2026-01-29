@@ -131,7 +131,7 @@
                   {{ $t('athlete.weightClass') }} <span class="text-red-500">*</span>
                 </label>
                 <select
-                  v-model="form.weight"
+                  v-model="form.weightClass"
                   required
                   class="w-full px-4 py-3 bg-gray-800/60 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
                 >
@@ -276,11 +276,11 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useFightersStore } from '~/stores/fighters'
-import type { Fighter } from '~/stores/fighters'
+import { useAthletesStore } from '~/stores/athletes'
+import type { Athlete } from '~/stores/athletes'
 
 const props = defineProps<{
-  fighter: Fighter
+  fighter: Athlete
 }>()
 
 const emit = defineEmits<{
@@ -288,7 +288,7 @@ const emit = defineEmits<{
 }>()
 
 const isOpen = ref(true)
-const fightersStore = useFightersStore()
+const athletesStore = useAthletesStore()
 const fileInput = ref<HTMLInputElement | null>(null)
 const previewImage = ref<string>('')
 
@@ -303,9 +303,8 @@ const handleFileUpload = (event: Event) => {
   const file = target.files?.[0]
 
   if (file) {
-    // Vérifier la taille du fichier (5MB max)
     if (file.size > 5 * 1024 * 1024) {
-      alert($t('addFighterModal.fileSizeError'))
+      alert('Le fichier est trop volumineux')
       return
     }
 
@@ -327,15 +326,15 @@ const removeImage = () => {
 }
 
 const submit = () => {
-  if (!form.value.name || !form.value.weight) {
-    alert($t('addFighterModal.requiredFieldsError'))
+  if (!form.value.name || !form.value.weightClass) {
+    alert('Veuillez remplir les champs obligatoires')
     return
   }
 
-  fightersStore.updateFighter(props.fighter.id, {
-    ...form.value,
-    image: previewImage.value || form.value.image
-  })
+  const athlete = athletesStore.athletes.find(a => a.id === props.fighter.id)
+  if (athlete) {
+    Object.assign(athlete, form.value)
+  }
   close()
 }
 

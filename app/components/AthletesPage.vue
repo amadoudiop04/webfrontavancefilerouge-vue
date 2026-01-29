@@ -14,6 +14,17 @@
         </div>
         <div class="flex items-center gap-2">
           <button
+            v-if="authStore.user?.isAdmin"
+            class="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-lg text-sm font-semibold transition"
+            @click="showAddModal = true"
+          >
+            <Icon
+              name="lucide:plus"
+              class="w-4 h-4"
+            />
+            {{ $t('athlete.addFighter') }}
+          </button>
+          <button
             v-if="athletesStore.compareList.length === 2"
             class="flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-semibold transition"
             @click="showCompareModal = true"
@@ -216,6 +227,30 @@
             />
             {{ $t('athlete.viewProfile') }}
           </NuxtLink>
+          <div
+            v-if="authStore.user?.isAdmin"
+            class="mt-3 flex gap-2"
+          >
+            <button
+              class="flex-1 px-3 py-2.5 bg-gray-800 hover:bg-gray-700 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2 text-white"
+              @click="handleEdit(athlete)"
+            >
+              <Icon
+                name="lucide:edit"
+                class="w-4 h-4"
+              />
+              {{ $t('common.edit') }}
+            </button>
+            <button
+              class="px-3 py-2.5 bg-red-600/20 hover:bg-red-600 border border-red-600/30 hover:border-red-600 text-red-400 hover:text-white rounded-lg transition text-sm font-semibold"
+              @click="handleDelete(athlete.id)"
+            >
+              <Icon
+                name="lucide:trash-2"
+                class="w-4 h-4"
+              />
+            </button>
+          </div>
         </CardContent>
       </Card>
     </div>
@@ -533,17 +568,35 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- Add Modal -->
+    <AddFighterModal
+      v-if="showAddModal"
+      @close="showAddModal = false"
+    />
+
+    <!-- Edit Modal -->
+    <EditFighterModal
+      v-if="showEditModal && selectedFighter"
+      :fighter="selectedFighter"
+      @close="showEditModal = false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useAthletesStore } from '~/stores/athletes'
+import { useAuthStore } from '~/stores/auth'
 
+const authStore = useAuthStore()
 const athletesStore = useAthletesStore()
 const searchQuery = ref('')
 const selectedWeightClass = ref('')
 const showCompareModal = ref(false)
+const showAddModal = ref(false)
+const showEditModal = ref(false)
+const selectedFighter = ref(null)
 
 const filteredAthletes = computed(() => {
   return athletesStore.searchAthletes(searchQuery.value, selectedWeightClass.value || undefined)
@@ -552,5 +605,24 @@ const filteredAthletes = computed(() => {
 const clearFilters = () => {
   searchQuery.value = ''
   selectedWeightClass.value = ''
+}
+
+const selectAthlete = (athlete) => {
+  athletesStore.setSelectedAthlete(athlete)
+}
+
+const deselectAthlete = () => {
+  athletesStore.setSelectedAthlete(null)
+}
+
+const handleEdit = (fighter) => {
+  selectedFighter.value = fighter
+  showEditModal.value = true
+}
+
+const handleDelete = (id) => {
+  if (confirm('Êtes-vous sûr de vouloir supprimer ce combattant ?')) {
+    athletesStore.removeFighter(id)
+  }
 }
 </script>

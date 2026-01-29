@@ -5,7 +5,6 @@
     @click.self="close"
   >
     <div class="w-full max-w-2xl bg-linear-to-br from-gray-900/95 to-black/95 border border-gray-800 rounded-2xl shadow-2xl shadow-red-900/20 overflow-hidden">
-      <!-- Header -->
       <div class="px-6 py-5 border-b border-gray-800 bg-gray-900/40">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
@@ -36,13 +35,11 @@
         </div>
       </div>
 
-      <!-- Body -->
       <div class="px-6 py-6 max-h-[70vh] overflow-y-auto">
         <form
           class="space-y-6"
           @submit.prevent="submit"
         >
-          <!-- Photo Upload Section -->
           <div class="space-y-3">
             <label class="block text-sm font-semibold text-gray-200">
               {{ $t('addFighterModal.fighterPhoto') }}
@@ -107,7 +104,6 @@
             </div>
           </div>
 
-          <!-- Basic Info Section -->
           <div class="space-y-4">
             <h3 class="text-sm font-semibold text-gray-300 flex items-center gap-2">
               <Icon
@@ -131,7 +127,7 @@
                   {{ $t('athlete.weightClass') }} <span class="text-red-500">*</span>
                 </label>
                 <select
-                  v-model="form.weight"
+                  v-model="form.weightClass"
                   required
                   class="w-full px-4 py-3 bg-gray-800/60 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition-all"
                 >
@@ -276,23 +272,33 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useFightersStore } from '~/stores/fighters'
+import { useAthletesStore } from '~/stores/athletes'
+import type { Athlete } from '~/stores/athletes'
+
+const emit = defineEmits<{
+  close: []
+}>()
 
 const isOpen = ref(true)
-const fightersStore = useFightersStore()
+const athletesStore = useAthletesStore()
 const fileInput = ref<HTMLInputElement | null>(null)
 const previewImage = ref<string>('')
 
 const form = ref({
   name: '',
-  weight: '',
+  nickname: '',
+  weightClass: '',
   wins: 0,
   losses: 0,
   draws: 0,
   knockouts: 0,
   submissions: 0,
   ranking: 1,
-  image: ''
+  image: '',
+  country: '',
+  height: '',
+  age: 0,
+  status: 'Actif' as const
 })
 
 const handleFileUpload = (event: Event) => {
@@ -302,7 +308,7 @@ const handleFileUpload = (event: Event) => {
   if (file) {
     // Vérifier la taille du fichier (5MB max)
     if (file.size > 5 * 1024 * 1024) {
-      alert($t('addFighterModal.fileSizeError'))
+      alert('Le fichier est trop volumineux')
       return
     }
 
@@ -324,22 +330,33 @@ const removeImage = () => {
 }
 
 const submit = () => {
-  if (!form.value.name || !form.value.weight) {
-    alert($t('addFighterModal.requiredFieldsError'))
+  if (!form.value.name || !form.value.weightClass) {
+    alert('Veuillez remplir les champs obligatoires')
     return
   }
 
-  fightersStore.addFighter({
+  const newAthlete: Athlete = {
+    id: String(Date.now()),
     name: form.value.name,
-    weight: form.value.weight,
-    wins: form.value.wins,
-    losses: form.value.losses,
-    draws: form.value.draws,
+    nickname: form.value.nickname,
+    weightClass: form.value.weightClass,
+    record: {
+      wins: form.value.wins,
+      losses: form.value.losses,
+      draws: form.value.draws
+    },
     knockouts: form.value.knockouts,
     submissions: form.value.submissions,
     ranking: form.value.ranking,
-    image: form.value.image || undefined
-  })
+    image: form.value.image,
+    country: form.value.country,
+    height: form.value.height,
+    age: form.value.age || undefined,
+    status: form.value.status,
+    inCompetition: true
+  }
+
+  athletesStore.athletes.push(newAthlete)
   close()
 }
 
@@ -347,8 +364,5 @@ const close = () => {
   isOpen.value = false
   emit('close')
 }
-
-const emit = defineEmits<{
-  close: []
-}>()
 </script>
+

@@ -63,27 +63,6 @@
           <Dashboard />
         </div>
 
-        <!-- Fighters Tab -->
-        <div v-if="activeTab === 'fighters'">
-          <div class="mb-6 flex items-center justify-between gap-4">
-            <div>
-              <h2 class="text-2xl font-semibold mb-1">
-                {{ $t('dashboard.fightersListTitle') }}
-              </h2>
-              <p class="text-gray-400 text-sm">
-                {{ $t('dashboard.fightersListSubtitle') }}
-              </p>
-            </div>
-            <button
-              class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded font-semibold transition"
-              @click="showAddModal = true"
-            >
-              + {{ $t('athlete.addFighter') }}
-            </button>
-          </div>
-          <FightersList />
-        </div>
-
         <!-- Athletes Tab -->
         <div v-if="activeTab === 'athletes'">
           <div class="mb-6">
@@ -142,7 +121,7 @@
                       name="lucide:calendar"
                       class="w-4 h-4"
                     />
-                    Session actuelle
+                    Membre depuis {{ formatMemberDate(authStore.user.memberSince) }}
                   </span>
                 </div>
               </div>
@@ -359,7 +338,7 @@
               <!-- View Mode -->
               <div
                 v-else
-                class="grid grid-cols-1 md:grid-cols-2 gap-4"
+                class="grid grid-cols-1 md:grid-cols-3 gap-4"
               >
                 <div class="rounded-xl border border-gray-800/50 bg-gray-900/30 p-5 hover:border-gray-700/50 transition-all group">
                   <div class="flex items-center gap-3 mb-3">
@@ -395,6 +374,26 @@
                       </p>
                       <p class="text-lg font-bold text-white mt-0.5 truncate">
                         {{ authStore.user.email }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="h-px bg-linear-to-r from-gray-800 via-gray-700 to-transparent" />
+                </div>
+
+                <div class="rounded-xl border border-gray-800/50 bg-gray-900/30 p-5 hover:border-gray-700/50 transition-all group">
+                  <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-linear-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 flex items-center justify-center group-hover:border-red-600/30 transition-colors">
+                      <Icon
+                        name="lucide:calendar"
+                        class="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors"
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">
+                        Membre depuis
+                      </p>
+                      <p class="text-lg font-bold text-white mt-0.5">
+                        {{ formatMemberDate(authStore.user.memberSince) }}
                       </p>
                     </div>
                   </div>
@@ -543,7 +542,7 @@ const activeTab = ref('dashboard')
 // Restaurer l'onglet depuis l'URL au montage
 onMounted(() => {
   const tabFromQuery = route.query.tab as string
-  if (tabFromQuery && ['dashboard', 'fighters', 'athletes', 'profile'].includes(tabFromQuery)) {
+  if (tabFromQuery && ['dashboard', 'athletes', 'profile'].includes(tabFromQuery)) {
     activeTab.value = tabFromQuery
   }
 })
@@ -558,7 +557,6 @@ const favoritesCount = computed(() => athletesStore.favoriteAthletes.length)
 
 const navigationItems = [
   { id: 'dashboard', i18nKey: 'nav.dashboard', icon: 'bar-chart-3' },
-  { id: 'fighters', i18nKey: 'athlete.fighters', icon: 'users' },
   { id: 'athletes', i18nKey: 'athlete.athletes', icon: 'trophy' },
   { id: 'profile', i18nKey: 'dashboard.profile', icon: 'user' }
 ]
@@ -580,6 +578,15 @@ const initials = computed(() => {
 const isValidEmail = (email: string) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   return emailRegex.test(email)
+}
+
+const formatMemberDate = (dateString: string) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('fr-FR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 }
 
 const validateProfileForm = () => {

@@ -88,31 +88,16 @@ export const useAthletesStore = defineStore('athletes', () => {
     return compareList.value.some(a => a.id === athleteId)
   }
 
-  const fetchAthletes = async () => {
-    isLoading.value = true
-    try {
-      // Charger les données depuis le fichier JSON
-      const response = await fetch('/data/athletes.json')
-      if (!response.ok) {
-        throw new Error('Erreur lors du chargement des athlètes')
-      }
-      const data = await response.json()
-      athletes.value = data as Athlete[]
-    } catch (err) {
-      error.value = err instanceof Error ? err.message : 'Une erreur est survenue'
-      // En cas d'erreur, garder les données déjà chargées
-      console.error('Erreur lors du chargement des athlètes:', err)
-    } finally {
-      isLoading.value = false
-    }
-  }
-
   const searchAthletes = (name: string, weightClass?: string): Athlete[] => {
     return athletes.value.filter((athlete) => {
       const matchName = athlete.name.toLowerCase().includes(name.toLowerCase())
       const matchWeight = !weightClass || athlete.weightClass === weightClass
       return matchName && matchWeight
     })
+  }
+
+  const removeFighter = (id: string) => {
+    athletes.value = athletes.value.filter(athlete => athlete.id !== id)
   }
 
   return {
@@ -129,7 +114,7 @@ export const useAthletesStore = defineStore('athletes', () => {
     toggleCompare,
     clearCompare,
     isInCompare,
-    fetchAthletes,
-    searchAthletes
+    searchAthletes,
+    removeFighter
   }
 })

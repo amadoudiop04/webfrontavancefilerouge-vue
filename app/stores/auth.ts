@@ -4,6 +4,8 @@ import { computed, ref } from 'vue'
 interface AuthUser {
   name: string
   email: string
+  memberSince: string
+  isAdmin: boolean
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -18,7 +20,9 @@ export const useAuthStore = defineStore('auth', () => {
 
     user.value = {
       email,
-      name: email.split('@')[0] || 'Utilisateur'
+      name: email.split('@')[0] || 'Utilisateur',
+      memberSince: new Date().toISOString(),
+      isAdmin: true
     }
   }
 
@@ -29,7 +33,9 @@ export const useAuthStore = defineStore('auth', () => {
 
     user.value = {
       email,
-      name
+      name,
+      memberSince: new Date().toISOString(),
+      isAdmin: true
     }
   }
 
