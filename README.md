@@ -72,3 +72,6 @@ pnpm typecheck        # Vérifier les types TypeScript
 # Autres
 pnpm postinstall      # Préparer Nuxt après installation
 ```
+
+ ## Retrouvez moi sur linkedin
+ https://www.linkedin.com/in/amadou-diop-3a5258316/

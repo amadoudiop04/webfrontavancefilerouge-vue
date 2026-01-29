@@ -8,7 +8,7 @@
         name="lucide:users"
         class="w-12 h-12 mx-auto mb-4 opacity-50"
       />
-      <p>Aucun combattant ajouté pour le moment.</p>
+      <p>{{ $t('athlete.noFighters') }}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -36,29 +36,40 @@
           <h3 class="text-xl font-bold mb-1 text-white">
             {{ fighter.name }}
           </h3>
-          <p v-if="fighter.weight" class="text-sm text-gray-400 mb-4">
+          <p
+            v-if="fighter.weight"
+            class="text-sm text-gray-400 mb-4"
+          >
             {{ fighter.weight }}
           </p>
-          
+
           <div class="space-y-2 mb-4">
             <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-400">Record</span>
+              <span class="text-gray-400">{{ $t('athlete.record') }}</span>
               <span class="font-semibold text-white">
                 {{ fighter.wins }}-{{ fighter.losses }}-{{ fighter.draws }}
               </span>
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div class="bg-gray-800/50 rounded-lg p-2 text-center">
-                <p class="text-xs text-gray-400">K.O.</p>
-                <p class="text-lg font-bold text-yellow-400">{{ fighter.knockouts }}</p>
+                <p class="text-xs text-gray-400">
+                  {{ $t('athlete.knockouts') }}
+                </p>
+                <p class="text-lg font-bold text-yellow-400">
+                  {{ fighter.knockouts }}
+                </p>
               </div>
               <div class="bg-gray-800/50 rounded-lg p-2 text-center">
-                <p class="text-xs text-gray-400">Soumissions</p>
-                <p class="text-lg font-bold text-purple-400">{{ fighter.submissions }}</p>
+                <p class="text-xs text-gray-400">
+                  {{ $t('athlete.submissions') }}
+                </p>
+                <p class="text-lg font-bold text-purple-400">
+                  {{ fighter.submissions }}
+                </p>
               </div>
             </div>
           </div>
-          
+
           <div class="flex gap-2">
             <button
               class="flex-1 px-3 py-2.5 bg-gray-800 hover:bg-gray-700 rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2 text-white"
@@ -68,7 +79,7 @@
                 name="lucide:edit"
                 class="w-4 h-4"
               />
-              Modifier
+              {{ $t('common.edit') }}
             </button>
             <button
               class="px-3 py-2.5 bg-red-600/20 hover:bg-red-600 border border-red-600/30 hover:border-red-600 text-red-400 hover:text-white rounded-lg transition text-sm font-semibold"
@@ -108,7 +119,7 @@ const handleEdit = (fighter: Fighter) => {
 }
 
 const handleDelete = (id: string) => {
-  if (confirm('Êtes-vous sûr de vouloir supprimer ce combattant ?')) {
+  if (confirm($t('fightersList.deleteConfirm'))) {
     fightersStore.removeFighter(id)
   }
 }

@@ -4,13 +4,14 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxtjs/i18n'
   ],
 
   components: {
     dirs: [
-      // Only use app/components for Nuxt 4
-      '~/components'
+      '~/components',
+      '~/components/ui'
     ]
   },
 
@@ -38,6 +39,21 @@ export default defineNuxtConfig({
         commaDangle: 'never',
         braceStyle: '1tbs'
       }
+    }
+  },
+
+  i18n: {
+    locales: [
+      { code: 'fr', iso: 'fr-FR', name: 'Français', file: 'fr.json' },
+      { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' }
+    ],
+    defaultLocale: 'fr',
+    langDir: 'locales',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
     }
   }
 })

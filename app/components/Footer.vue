@@ -16,7 +16,7 @@
             </span>
           </div>
           <p class="text-gray-400 text-sm leading-relaxed">
-            Votre plateforme complète pour gérer et analyser les performances de vos combattants UFC avec des statistiques en temps réel.
+            {{ $t('footer.description') }}
           </p>
           <div class="flex gap-3">
             <a
@@ -65,7 +65,7 @@
         <!-- Navigation Links -->
         <div>
           <h3 class="text-white font-semibold mb-4">
-            Navigation
+            {{ $t('footer.navigation') }}
           </h3>
           <ul class="space-y-2">
             <li>
@@ -77,7 +77,7 @@
                   name="lucide:home"
                   class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
                 />
-                Accueil
+                {{ $t('common.home') }}
               </NuxtLink>
             </li>
             <li>
@@ -89,7 +89,7 @@
                   name="lucide:layout-dashboard"
                   class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
                 />
-                Dashboard
+                {{ $t('nav.dashboard') }}
               </NuxtLink>
             </li>
             <li>
@@ -101,7 +101,7 @@
                   name="lucide:log-in"
                   class="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
                 />
-                Connexion
+                {{ $t('nav.login') }}
               </NuxtLink>
             </li>
           </ul>
@@ -110,7 +110,7 @@
         <!-- Features -->
         <div>
           <h3 class="text-white font-semibold mb-4">
-            Fonctionnalités
+            {{ $t('footer.features') }}
           </h3>
           <ul class="space-y-2">
             <li>
@@ -118,8 +118,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:bar-chart-3" class="w-4 h-4" />
-                Statistiques
+                <Icon
+                  name="lucide:bar-chart-3"
+                  class="w-4 h-4"
+                />
+                {{ $t('nav.statistics') }}
               </a>
             </li>
             <li>
@@ -127,8 +130,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:users" class="w-4 h-4" />
-                Combattants
+                <Icon
+                  name="lucide:users"
+                  class="w-4 h-4"
+                />
+                {{ $t('athlete.fighters') }}
               </a>
             </li>
             <li>
@@ -136,8 +142,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:trophy" class="w-4 h-4" />
-                Classements
+                <Icon
+                  name="lucide:trophy"
+                  class="w-4 h-4"
+                />
+                {{ $t('athlete.ranking') }}
               </a>
             </li>
             <li>
@@ -145,8 +154,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:heart" class="w-4 h-4" />
-                Favoris
+                <Icon
+                  name="lucide:heart"
+                  class="w-4 h-4"
+                />
+                {{ $t('nav.favorites') }}
               </a>
             </li>
           </ul>
@@ -155,7 +167,7 @@
         <!-- Contact & Legal -->
         <div>
           <h3 class="text-white font-semibold mb-4">
-            Informations
+            {{ $t('footer.information') }}
           </h3>
           <ul class="space-y-2">
             <li>
@@ -163,8 +175,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:mail" class="w-4 h-4" />
-                Contact
+                <Icon
+                  name="lucide:mail"
+                  class="w-4 h-4"
+                />
+                {{ $t('footer.contact') }}
               </a>
             </li>
             <li>
@@ -172,8 +187,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:shield" class="w-4 h-4" />
-                Confidentialité
+                <Icon
+                  name="lucide:shield"
+                  class="w-4 h-4"
+                />
+                {{ $t('footer.privacy') }}
               </a>
             </li>
             <li>
@@ -181,8 +199,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:file-text" class="w-4 h-4" />
-                Conditions
+                <Icon
+                  name="lucide:file-text"
+                  class="w-4 h-4"
+                />
+                {{ $t('footer.terms') }}
               </a>
             </li>
             <li>
@@ -190,8 +211,11 @@
                 href="#"
                 class="text-gray-400 hover:text-red-400 transition-colors text-sm inline-flex items-center gap-2"
               >
-                <Icon name="lucide:help-circle" class="w-4 h-4" />
-                Support
+                <Icon
+                  name="lucide:help-circle"
+                  class="w-4 h-4"
+                />
+                {{ $t('footer.support') }}
               </a>
             </li>
           </ul>
@@ -202,13 +226,19 @@
       <div class="pt-8 border-t border-gray-800">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
           <p class="text-gray-400 text-sm">
-            © {{ currentYear }} UFC Stats Manager. Tous droits réservés.
+            © {{ currentYear }} {{ $t('footer.copyright') }}
           </p>
           <div class="flex items-center gap-2 text-gray-400 text-sm">
-            <Icon name="lucide:code" class="w-4 h-4" />
-            <span>Développé avec</span>
-            <Icon name="lucide:heart" class="w-4 h-4 text-red-500 fill-current" />
-            <span>et Vue.js</span>
+            <Icon
+              name="lucide:code"
+              class="w-4 h-4"
+            />
+            <span>{{ $t('footer.developedWith') }}</span>
+            <Icon
+              name="lucide:heart"
+              class="w-4 h-4 text-red-500 fill-current"
+            />
+            <span>{{ $t('footer.and') }} Vue.js</span>
           </div>
         </div>
       </div>
@@ -218,6 +248,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+
+defineOptions({
+  name: 'AppFooter'
+})
 
 const currentYear = computed(() => new Date().getFullYear())
 </script>

@@ -1,6 +1,5 @@
 import type { Athlete } from '~/stores/athletes'
 
-
 export async function loadAthletesFromJson(): Promise<Athlete[]> {
   try {
     const response = await fetch('/data/athletes.json')
@@ -15,7 +14,6 @@ export async function loadAthletesFromJson(): Promise<Athlete[]> {
   }
 }
 
-
 export function addAthleteToData(athletes: Athlete[], newAthlete: Omit<Athlete, 'id'>): Athlete[] {
   const athlete: Athlete = {
     ...newAthlete,
@@ -29,7 +27,6 @@ export function updateAthleteInData(athletes: Athlete[], id: string, updates: Pa
     athlete.id === id ? { ...athlete, ...updates } : athlete
   )
 }
-
 
 export function removeAthleteFromData(athletes: Athlete[], id: string): Athlete[] {
   return athletes.filter(athlete => athlete.id !== id)

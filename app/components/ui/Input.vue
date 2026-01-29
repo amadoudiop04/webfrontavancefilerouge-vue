@@ -6,7 +6,10 @@
       class="flex text-sm font-semibold text-gray-200 items-center gap-2"
     >
       {{ label }}
-      <span v-if="required" class="text-red-500 text-xs">*</span>
+      <span
+        v-if="required"
+        class="text-red-500 text-xs"
+      >*</span>
     </label>
     <div class="relative">
       <input
@@ -26,18 +29,39 @@
         @blur="$emit('blur')"
         @focus="$emit('focus')"
       >
-      <div v-if="error" class="absolute right-3 top-1/2 -translate-y-1/2">
-        <Icon name="lucide:alert-circle" class="w-5 h-5 text-red-500" />
+      <div
+        v-if="error"
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+      >
+        <Icon
+          name="lucide:alert-circle"
+          class="w-5 h-5 text-red-500"
+        />
       </div>
-      <div v-if="success && !error" class="absolute right-3 top-1/2 -translate-y-1/2">
-        <Icon name="lucide:check-circle" class="w-5 h-5 text-green-500" />
+      <div
+        v-if="success && !error"
+        class="absolute right-3 top-1/2 -translate-y-1/2"
+      >
+        <Icon
+          name="lucide:check-circle"
+          class="w-5 h-5 text-green-500"
+        />
       </div>
     </div>
-    <p v-if="error" class="text-xs text-red-400 flex items-center gap-1">
-      <Icon name="lucide:info" class="w-3 h-3" />
+    <p
+      v-if="error"
+      class="text-xs text-red-400 flex items-center gap-1"
+    >
+      <Icon
+        name="lucide:info"
+        class="w-3 h-3"
+      />
       {{ error }}
     </p>
-    <p v-if="hint && !error" class="text-xs text-gray-400">
+    <p
+      v-if="hint && !error"
+      class="text-xs text-gray-400"
+    >
       {{ hint }}
     </p>
   </div>

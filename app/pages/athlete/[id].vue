@@ -16,7 +16,7 @@
             class="w-12 h-12 text-red-600 animate-spin mx-auto mb-4"
           />
           <p class="text-gray-400">
-            Chargement des détails...
+            {{ $t('common.loading') }}
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@
                     />
                   </div>
                 </div>
-                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-bold shadow-lg whitespace-nowrap">
+                <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-linear-to-r from-red-600 to-red-500 text-white text-sm font-bold shadow-lg whitespace-nowrap">
                   Rang #{{ athlete.ranking }}
                 </div>
               </div>
@@ -91,9 +91,11 @@
                     <span
                       :class="[
                         'px-3 py-1 rounded-full text-sm font-semibold',
-                        athlete.status === 'Actif' ? 'bg-green-600/20 text-green-400 border border-green-600/30' :
-                        athlete.status === 'Blessé' ? 'bg-yellow-600/20 text-yellow-400 border border-yellow-600/30' :
-                        'bg-gray-600/20 text-gray-400 border border-gray-600/30'
+                        athlete.status === 'Actif'
+                          ? 'bg-green-600/20 text-green-400 border border-green-600/30'
+                          : athlete.status === 'Blessé'
+                            ? 'bg-yellow-600/20 text-yellow-400 border border-yellow-600/30'
+                            : 'bg-gray-600/20 text-gray-400 border border-gray-600/30'
                       ]"
                     >
                       {{ athlete.status }}
@@ -105,7 +107,7 @@
                       v-if="athlete.inCompetition"
                       class="px-3 py-1 rounded-full text-sm font-semibold bg-purple-600/20 text-purple-400 border border-purple-600/30"
                     >
-                      En compétition
+                      {{ $t('athlete.inCompetition') }}
                     </span>
                   </div>
                 </div>
@@ -118,7 +120,7 @@
                         name="lucide:flag"
                         class="w-4 h-4 text-gray-400"
                       />
-                      <span class="text-xs text-gray-400">Pays</span>
+                      <span class="text-xs text-gray-400">{{ $t('athlete.country') }}</span>
                     </div>
                     <p class="text-lg font-bold text-white">
                       {{ athlete.country }}
@@ -130,7 +132,7 @@
                         name="lucide:ruler"
                         class="w-4 h-4 text-gray-400"
                       />
-                      <span class="text-xs text-gray-400">Taille</span>
+                      <span class="text-xs text-gray-400">{{ $t('athlete.height') }}</span>
                     </div>
                     <p class="text-lg font-bold text-white">
                       {{ athlete.height }}
@@ -142,7 +144,7 @@
                         name="lucide:cake"
                         class="w-4 h-4 text-gray-400"
                       />
-                      <span class="text-xs text-gray-400">Âge</span>
+                      <span class="text-xs text-gray-400">{{ $t('athlete.age') }}</span>
                     </div>
                     <p class="text-lg font-bold text-white">
                       {{ athlete.age }} ans
@@ -176,7 +178,7 @@
                 class="w-5 h-5 text-red-400"
               />
               <h2 class="text-xl font-bold">
-                Bilan des combats
+                {{ $t('athlete.fightRecord') }}
               </h2>
             </div>
 
@@ -190,7 +192,7 @@
                   {{ athlete.record.wins }}
                 </p>
                 <p class="text-sm text-gray-400">
-                  Victoires
+                  {{ $t('athlete.wins') }}
                 </p>
               </div>
               <div class="bg-red-600/10 border border-red-600/30 rounded-xl p-5 text-center">
@@ -202,7 +204,7 @@
                   {{ athlete.record.losses }}
                 </p>
                 <p class="text-sm text-gray-400">
-                  Défaites
+                  {{ $t('athlete.losses') }}
                 </p>
               </div>
               <div class="bg-gray-600/10 border border-gray-600/30 rounded-xl p-5 text-center">
@@ -214,7 +216,7 @@
                   {{ athlete.record.draws }}
                 </p>
                 <p class="text-sm text-gray-400">
-                  Nuls
+                  {{ $t('athlete.draws') }}
                 </p>
               </div>
             </div>
@@ -222,12 +224,12 @@
             <!-- Win Rate Progress -->
             <div class="space-y-3">
               <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-400">Taux de victoire</span>
+                <span class="text-gray-400">{{ $t('landing.winRate') }}</span>
                 <span class="font-bold text-white">{{ winRate }}%</span>
               </div>
               <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
                 <div
-                  class="h-full bg-gradient-to-r from-green-600 to-green-400 transition-all duration-500"
+                  class="h-full bg-linear-to-r from-green-600 to-green-400 transition-all duration-500"
                   :style="{ width: `${winRate}%` }"
                 />
               </div>
@@ -242,7 +244,7 @@
                 class="w-5 h-5 text-yellow-400"
               />
               <h2 class="text-xl font-bold">
-                Statistiques
+                {{ $t('landing.livePerformance') }}
               </h2>
             </div>
 
@@ -255,7 +257,7 @@
                       class="w-5 h-5 text-yellow-400"
                     />
                   </div>
-                  <span class="text-gray-300">K.O.</span>
+                  <span class="text-gray-300">{{ $t('athlete.knockouts') }}</span>
                 </div>
                 <span class="text-2xl font-bold text-yellow-400">{{ athlete.knockouts }}</span>
               </div>
@@ -268,7 +270,7 @@
                       class="w-5 h-5 text-purple-400"
                     />
                   </div>
-                  <span class="text-gray-300">Soumissions</span>
+                  <span class="text-gray-300">{{ $t('athlete.submissions') }}</span>
                 </div>
                 <span class="text-2xl font-bold text-purple-400">{{ athlete.submissions }}</span>
               </div>
@@ -281,7 +283,7 @@
                       class="w-5 h-5 text-blue-400"
                     />
                   </div>
-                  <span class="text-gray-300">Finitions</span>
+                  <span class="text-gray-300">{{ $t('athlete.finishes') }}</span>
                 </div>
                 <span class="text-2xl font-bold text-blue-400">{{ finishRate }}%</span>
               </div>
@@ -308,7 +310,7 @@
                   name="lucide:weight"
                   class="w-4 h-4"
                 />
-                Catégorie de poids
+                {{ $t('athlete.weightClass') }}
               </p>
               <p class="text-lg font-semibold text-white">
                 {{ athlete.weightClass }}
@@ -321,14 +323,16 @@
                   name="lucide:activity"
                   class="w-4 h-4"
                 />
-                Statut
+                {{ $t('athlete.status.label') }}
               </p>
               <p
                 :class="[
                   'text-lg font-semibold',
-                  athlete.status === 'Actif' ? 'text-green-400' :
-                  athlete.status === 'Blessé' ? 'text-yellow-400' :
-                  'text-gray-400'
+                  athlete.status === 'Actif'
+                    ? 'text-green-400'
+                    : athlete.status === 'Blessé'
+                      ? 'text-yellow-400'
+                      : 'text-gray-400'
                 ]"
               >
                 {{ athlete.status }}
@@ -341,10 +345,10 @@
                   name="lucide:calendar"
                   class="w-4 h-4"
                 />
-                Disponibilité
+                {{ $t('athlete.availability') }}
               </p>
               <p class="text-lg font-semibold text-white">
-                {{ athlete.inCompetition ? 'En compétition' : 'Disponible' }}
+                {{ athlete.inCompetition ? $t('athlete.inCompetition') : $t('athlete.available') }}
               </p>
             </div>
           </div>
@@ -360,7 +364,7 @@
               name="lucide:arrow-left"
               class="w-5 h-5"
             />
-            Retour aux athlètes
+            {{ $t('athlete.backToAthletes') }}
           </NuxtLink>
         </div>
       </div>
@@ -385,7 +389,7 @@ const athlete = computed(() => {
 })
 
 const breadcrumbItems = computed(() => [
-  { label: 'Tableau de bord', to: '/dashboard?tab=athletes' },
+  { label: $t('common.home'), to: '/dashboard?tab=athletes' },
   { label: 'Athlètes UFC' },
   { label: athlete.value?.name || 'Détails' }
 ])

@@ -37,11 +37,11 @@
                 class="w-5 h-5 text-white"
               />
             </div>
-            <span class="text-xl font-bold text-white">Menu</span>
+            <span class="text-xl font-bold text-white">{{ $t('rightSidebar.menu') }}</span>
           </div>
           <button
             class="p-2 rounded-lg hover:bg-red-900/20 transition-colors group"
-            aria-label="Fermer le menu"
+            :aria-label="$t('rightSidebar.closeMenu')"
             @click="$emit('close')"
           >
             <Icon
@@ -61,9 +61,12 @@
               @click="$emit('close')"
             >
               <span class="flex items-center gap-3">
-                <Icon name="lucide:layout-dashboard" class="w-5 h-5" />
+                <Icon
+                  name="lucide:layout-dashboard"
+                  class="w-5 h-5"
+                />
                 <span class="w-1 h-6 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                Dashboard
+                {{ $t('nav.dashboard') }}
               </span>
             </NuxtLink>
             <a
@@ -72,9 +75,12 @@
               @click="handleSmoothScroll($event, '#fighters-section')"
             >
               <span class="flex items-center gap-3">
-                <Icon name="lucide:users" class="w-5 h-5" />
+                <Icon
+                  name="lucide:users"
+                  class="w-5 h-5"
+                />
                 <span class="w-1 h-6 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                Combattants
+                {{ $t('athlete.fighters') }}
               </span>
             </a>
             <a
@@ -83,9 +89,12 @@
               @click="handleSmoothScroll($event, '#features-section')"
             >
               <span class="flex items-center gap-3">
-                <Icon name="lucide:zap" class="w-5 h-5" />
+                <Icon
+                  name="lucide:zap"
+                  class="w-5 h-5"
+                />
                 <span class="w-1 h-6 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                Fonctionnalités
+                {{ $t('landing.featuresTitle') }}
               </span>
             </a>
             <a
@@ -94,9 +103,12 @@
               @click="handleSmoothScroll($event, '#support-section')"
             >
               <span class="flex items-center gap-3">
-                <Icon name="lucide:headphones" class="w-5 h-5" />
+                <Icon
+                  name="lucide:headphones"
+                  class="w-5 h-5"
+                />
                 <span class="w-1 h-6 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                Support
+                {{ $t('footer.support') }}
               </span>
             </a>
           </div>
@@ -110,13 +122,13 @@
               class="block w-full py-3 px-4 rounded-lg bg-linear-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold transition transform hover:-translate-y-px shadow-lg shadow-red-900/40 text-center"
               @click="$emit('close')"
             >
-              Accéder au Dashboard
+              {{ $t('nav.accessDashboard') }}
             </NuxtLink>
             <button
               class="w-full py-3 px-4 rounded-lg bg-transparent border border-gray-700 text-gray-300 font-semibold transition hover:border-red-500 hover:bg-red-900/20 hover:text-white"
               @click="handleLogout"
             >
-              Se déconnecter
+              {{ $t('nav.logout') }}
             </button>
           </template>
           <template v-else>
@@ -124,13 +136,13 @@
               class="w-full py-3 px-4 rounded-lg bg-transparent border border-red-500/60 text-white font-semibold transition hover:border-red-400 hover:bg-red-900/20 hover:text-red-200"
               @click="handleGetStarted"
             >
-              Démo guidée
+              {{ $t('rightSidebar.guidedDemo') }}
             </button>
             <button
               class="w-full py-3 px-4 rounded-lg bg-linear-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold transition transform hover:-translate-y-px shadow-lg shadow-red-900/40"
               @click="handleGetStarted"
             >
-              Se Connecter
+              {{ $t('nav.login') }}
             </button>
           </template>
         </div>

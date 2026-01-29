@@ -29,12 +29,12 @@ export const useAthletesStore = defineStore('athletes', () => {
   const compareList = ref<Athlete[]>([])
   const isLoading = ref(false)
   const error = ref<string | null>(null)
-  
+
   // Favorites management with localStorage
   const favorites = ref<string[]>([])
-  
+
   // Initialize favorites from localStorage
-  if (import.meta.client) {
+  if (typeof window !== 'undefined') {
     const stored = localStorage.getItem('ufc-favorites')
     if (stored) {
       try {
@@ -58,7 +58,7 @@ export const useAthletesStore = defineStore('athletes', () => {
       favorites.value.push(athleteId)
     }
     // Save to localStorage
-    if (import.meta.client) {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('ufc-favorites', JSON.stringify(favorites.value))
     }
   }

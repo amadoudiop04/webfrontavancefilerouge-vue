@@ -9,7 +9,7 @@
             class="w-5 h-5 text-red-600"
           />
           <h3 class="font-semibold text-white text-sm">
-            Filtres
+            {{ $t('common.filter') }}
           </h3>
         </div>
         <div class="flex items-center gap-2">
@@ -22,7 +22,7 @@
               name="lucide:git-compare"
               class="w-4 h-4"
             />
-            Comparer ({{ athletesStore.compareList.length }})
+            {{ $t('athletesPage.compare', { count: athletesStore.compareList.length }) }}
           </button>
           <button
             v-if="athletesStore.compareList.length > 0"
@@ -48,7 +48,7 @@
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Rechercher par nom..."
+            :placeholder="$t('athletesPage.searchPlaceholder')"
             class="w-full pl-10 pr-4 py-2.5 bg-gray-800/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition"
           >
         </div>
@@ -65,7 +65,7 @@
               class="w-full pl-10 pr-4 py-2.5 bg-gray-800/60 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent transition appearance-none cursor-pointer"
             >
               <option value="">
-                Toutes les catégories
+                {{ $t('athletesPage.allCategories') }}
               </option>
               <option>Poids plume</option>
               <option>Poids léger</option>
@@ -89,7 +89,7 @@
               name="lucide:x"
               class="w-4 h-4"
             />
-            <span class="hidden sm:inline text-sm">Réinitialiser</span>
+            <span class="hidden sm:inline text-sm">{{ $t('athletesPage.reset') }}</span>
           </button>
         </div>
       </div>
@@ -130,7 +130,7 @@
         name="lucide:search-x"
         class="w-12 h-12 mx-auto mb-4 opacity-50"
       />
-      <p>Aucun athlète trouvé pour "{{ searchQuery }}"</p>
+      <p>{{ $t('athletesPage.noAthletesFound', { search: searchQuery }) }}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -181,11 +181,11 @@
             </p>
             <div class="mt-4 space-y-1 text-sm">
               <div class="flex justify-between">
-                <span class="text-gray-400">Record</span>
+                <span class="text-gray-400">{{ $t('athlete.record') }}</span>
                 <span class="text-white font-semibold">{{ athlete.record.wins }}-{{ athlete.record.losses }}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-gray-400">KOs</span>
+                <span class="text-gray-400">{{ $t('athlete.knockouts') }}</span>
                 <span class="text-red-600 font-semibold">{{ athlete.knockouts }}</span>
               </div>
             </div>
@@ -203,7 +203,7 @@
                 name="lucide:git-compare"
                 class="w-4 h-4"
               />
-              <span>Sélectionner pour comparer</span>
+              <span>{{ $t('athletesPage.selectToCompare') }}</span>
             </label>
           </div>
           <NuxtLink
@@ -214,7 +214,7 @@
               name="lucide:eye"
               class="w-4 h-4"
             />
-            Voir détails
+            {{ $t('athlete.viewProfile') }}
           </NuxtLink>
         </CardContent>
       </Card>
@@ -249,7 +249,7 @@
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <div class="text-gray-400 text-sm">
-                Pays
+                {{ $t('athlete.country') }}
               </div>
               <div class="text-white font-semibold">
                 {{ athletesStore.selectedAthlete.country }}
@@ -257,7 +257,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                Catégorie
+                {{ $t('athlete.weightClass') }}
               </div>
               <div class="text-white font-semibold">
                 {{ athletesStore.selectedAthlete.weightClass }}
@@ -265,7 +265,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                Taille
+                {{ $t('athlete.height') }}
               </div>
               <div class="text-white font-semibold">
                 {{ athletesStore.selectedAthlete.height }}
@@ -273,7 +273,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                Âge
+                {{ $t('athlete.age') }}
               </div>
               <div class="text-white font-semibold">
                 {{ athletesStore.selectedAthlete.age }}
@@ -281,7 +281,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                Victoires
+                {{ $t('athlete.wins') }}
               </div>
               <div class="text-green-600 font-semibold">
                 {{ athletesStore.selectedAthlete.record.wins }}
@@ -289,7 +289,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                Défaites
+                {{ $t('athlete.losses') }}
               </div>
               <div class="text-red-600 font-semibold">
                 {{ athletesStore.selectedAthlete.record.losses }}
@@ -297,7 +297,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                KOs
+                {{ $t('athlete.knockouts') }}
               </div>
               <div class="text-yellow-600 font-semibold">
                 {{ athletesStore.selectedAthlete.knockouts }}
@@ -305,7 +305,7 @@
             </div>
             <div>
               <div class="text-gray-400 text-sm">
-                Soumissions
+                {{ $t('athlete.submissions') }}
               </div>
               <div class="text-purple-600 font-semibold">
                 {{ athletesStore.selectedAthlete.submissions }}
@@ -316,7 +316,7 @@
             class="mt-6 w-full px-4 py-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-white font-semibold transition"
             @click="deselectAthlete"
           >
-            Fermer les détails
+            {{ $t('athletesPage.closeDetails') }}
           </button>
         </CardContent>
       </Card>
@@ -337,7 +337,7 @@
                 class="w-6 h-6 text-blue-600"
               />
               <h2 class="text-2xl font-bold text-white">
-                Comparaison des combattants
+                {{ $t('athletesPage.compareTitle') }}
               </h2>
             </div>
             <button
@@ -520,13 +520,13 @@
                 class="flex-1 px-4 py-3 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-lg text-white font-semibold transition"
                 @click="athletesStore.clearCompare(); showCompareModal = false"
               >
-                Réinitialiser
+                {{ $t('athletesPage.reset') }}
               </button>
               <button
                 class="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition"
                 @click="showCompareModal = false"
               >
-                Fermer
+                {{ $t('common.back') }}
               </button>
             </div>
           </div>

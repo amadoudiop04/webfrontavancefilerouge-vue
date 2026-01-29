@@ -6,7 +6,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): Ref<T> => {
 
   // Charger depuis localStorage au montage
   onMounted(() => {
-    if (import.meta.client) {
+    if (typeof window !== 'undefined') {
       try {
         const item = window.localStorage.getItem(key)
         if (item) {
@@ -22,7 +22,7 @@ export const useLocalStorage = <T>(key: string, initialValue: T): Ref<T> => {
   watch(
     storedValue,
     (newValue) => {
-      if (import.meta.client) {
+      if (typeof window !== 'undefined') {
         try {
           window.localStorage.setItem(key, JSON.stringify(newValue))
         } catch (error) {

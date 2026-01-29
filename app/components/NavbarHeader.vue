@@ -6,7 +6,7 @@
         <button
           type="button"
           class="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-black rounded-lg px-2 py-1 -ml-2 transition-all"
-          aria-label="Retour à l'accueil"
+          :aria-label="$t('common.backHome')"
           @click="handleLogoClick"
         >
           <div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-linear-to-br from-red-700/30 to-red-900/20 border border-red-600/50 shadow-lg shadow-red-900/30 group-hover:shadow-red-600/50 group-hover:border-red-500 transition-all duration-300 group-hover:scale-110">
@@ -21,7 +21,7 @@
               UFC Stats
             </span>
             <span class="text-[10px] sm:text-xs text-gray-400/80 hidden sm:inline group-hover:text-gray-300 transition-colors">
-              Gestionnaire de statistiques
+              {{ $t('nav.statsManager') }}
             </span>
           </div>
         </button>
@@ -38,7 +38,7 @@
               name="lucide:layout-dashboard"
               class="w-4 h-4 shrink-0"
             />
-            <span class="hidden sm:inline text-sm font-medium">Dashboard</span>
+            <span class="hidden sm:inline text-sm font-medium">{{ $t('nav.dashboard') }}</span>
           </NuxtLink>
 
           <div
@@ -66,7 +66,11 @@
             {{ initials }}
           </div>
 
+          <!-- Language Switcher - Always visible -->
+          <LanguageSwitcher />
+
           <button
+            v-if="authStore.user"
             class="flex items-center gap-2 px-3 py-2 sm:px-4 hover:bg-red-600/10 hover:border-red-600/50 hover:text-red-400 transition-all duration-200 border border-gray-700/50"
             aria-label="Se déconnecter"
             @click="handleLogout"
@@ -75,7 +79,7 @@
               name="lucide:log-out"
               class="w-4 h-4 shrink-0"
             />
-            <span class="hidden sm:inline text-sm font-medium">Déconnexion</span>
+            <span class="hidden sm:inline text-sm font-medium">{{ $t('nav.logout') }}</span>
           </button>
         </div>
       </div>

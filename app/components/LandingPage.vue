@@ -25,6 +25,9 @@
 
           <!-- CTA Buttons & Menu -->
           <div class="flex items-center gap-3">
+            <!-- Language Switcher -->
+            <LanguageSwitcher />
+
             <button
               class="p-2.5 rounded-lg bg-red-900/20 border border-red-500/40 hover:bg-red-900/40 hover:border-red-500/60 transition-all duration-200 group"
               aria-label="Ouvrir le menu"
@@ -46,29 +49,26 @@
         <div class="max-w-3xl space-y-6">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-red-500/40 bg-red-600/10 text-sm text-red-200">
             <span class="block w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-            Nouveau tableau de bord 2026
+            {{ $t('landing.badge') }}
           </div>
           <h1 class="text-5xl md:text-6xl font-bold leading-tight">
-            Maîtrisez vos statistiques de
-            <span class="text-red-500"> combat</span>
+            {{ $t('landing.heroTitle') }}<span class="text-red-500">{{ $t('landing.heroTitleHighlight') }}</span>
           </h1>
           <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
-            Une plateforme complète pour gérer, suivre et analyser les
-            performances de vos combattants UFC avec des visualisations
-            modernes et des alertes en temps réel.
+            {{ $t('landing.heroDescription') }}
           </p>
           <div class="flex flex-col sm:flex-row sm:items-center gap-4">
             <button
               class="inline-flex items-center justify-center bg-linear-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold py-3 px-7 rounded-lg text-lg transition transform hover:-translate-y-0.5 shadow-lg shadow-red-900/40"
               @click="emit('onGetStarted')"
             >
-              Commencer Maintenant
+              {{ $t('landing.ctaStart') }}
             </button>
             <button
               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-gray-700 text-gray-200 hover:border-red-500 hover:text-white transition"
               @click="emit('onGetStarted')"
             >
-              Découvrir la plateforme
+              {{ $t('landing.ctaDiscover') }}
             </button>
           </div>
 
@@ -94,10 +94,10 @@
             <div class="p-6 border-b border-red-900/30 flex items-center justify-between">
               <div>
                 <p class="text-sm text-gray-400">
-                  Vue manager
+                  {{ $t('landing.liveView') }}
                 </p>
                 <p class="text-2xl font-bold">
-                  Performance live
+                  {{ $t('landing.livePerformance') }}
                 </p>
               </div>
               <div class="flex items-center gap-2">
@@ -105,35 +105,53 @@
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
                 </span>
-                <span class="text-xs text-green-400 font-semibold">En direct</span>
+                <span class="text-xs text-green-400 font-semibold">{{ $t('landing.liveStatus') }}</span>
               </div>
             </div>
             <div class="p-6 space-y-4">
               <div class="grid grid-cols-2 gap-4">
                 <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
-                  <p class="text-gray-400 text-sm mb-1">Combattants actifs</p>
-                  <p class="text-3xl font-bold text-white">{{ liveStats.activeFighters }}</p>
+                  <p class="text-gray-400 text-sm mb-1">
+                    {{ $t('landing.activeFighters') }}
+                  </p>
+                  <p class="text-3xl font-bold text-white">
+                    {{ liveStats.activeFighters }}
+                  </p>
                   <div class="flex items-center gap-1 text-green-400 text-xs mt-1">
-                    <Icon name="lucide:trending-up" class="w-3 h-3" />
+                    <Icon
+                      name="lucide:trending-up"
+                      class="w-3 h-3"
+                    />
                     <span>+12%</span>
                   </div>
                 </div>
                 <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
-                  <p class="text-gray-400 text-sm mb-1">Événements</p>
-                  <p class="text-3xl font-bold text-white">{{ liveStats.events }}</p>
+                  <p class="text-gray-400 text-sm mb-1">
+                    {{ $t('landing.events') }}
+                  </p>
+                  <p class="text-3xl font-bold text-white">
+                    {{ liveStats.events }}
+                  </p>
                   <div class="flex items-center gap-1 text-blue-400 text-xs mt-1">
-                    <Icon name="lucide:calendar" class="w-3 h-3" />
-                    <span>Ce mois</span>
+                    <Icon
+                      name="lucide:calendar"
+                      class="w-3 h-3"
+                    />
+                    <span>{{ $t('landing.thisMonth') }}</span>
                   </div>
                 </div>
               </div>
               <div class="bg-gray-900/50 rounded-xl p-4 border border-gray-800">
                 <div class="flex items-center justify-between mb-2">
-                  <p class="text-gray-400 text-sm">Taux de victoire</p>
-                  <p class="text-white font-bold">{{ liveStats.winRate }}%</p>
+                  <p class="text-gray-400 text-sm">
+                    {{ $t('landing.winRate') }}
+                  </p>
+                  <p class="text-white font-bold">
+                    {{ liveStats.winRate }}%
+                  </p>
                 </div>
                 <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
-                  <div 
+                  <div
                     class="bg-linear-to-r from-red-600 to-red-500 h-full rounded-full transition-all duration-1000"
                     :style="{ width: `${liveStats.winRate}%` }"
                   />
@@ -141,16 +159,28 @@
               </div>
               <div class="grid grid-cols-3 gap-2 text-center">
                 <div class="bg-gray-900/50 rounded-lg p-3 border border-gray-800">
-                  <p class="text-xl font-bold text-green-400">{{ liveStats.wins }}</p>
-                  <p class="text-xs text-gray-400">Victoires</p>
+                  <p class="text-xl font-bold text-green-400">
+                    {{ liveStats.wins }}
+                  </p>
+                  <p class="text-xs text-gray-400">
+                    {{ $t('landing.wins') }}
+                  </p>
                 </div>
                 <div class="bg-gray-900/50 rounded-lg p-3 border border-gray-800">
-                  <p class="text-xl font-bold text-yellow-400">{{ liveStats.kos }}</p>
-                  <p class="text-xs text-gray-400">K.O.</p>
+                  <p class="text-xl font-bold text-yellow-400">
+                    {{ liveStats.kos }}
+                  </p>
+                  <p class="text-xs text-gray-400">
+                    {{ $t('athlete.knockouts') }}
+                  </p>
                 </div>
                 <div class="bg-gray-900/50 rounded-lg p-3 border border-gray-800">
-                  <p class="text-xl font-bold text-red-400">{{ liveStats.losses }}</p>
-                  <p class="text-xs text-gray-400">Défaites</p>
+                  <p class="text-xl font-bold text-red-400">
+                    {{ liveStats.losses }}
+                  </p>
+                  <p class="text-xs text-gray-400">
+                    {{ $t('landing.losses') }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -160,75 +190,123 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features-section" class="relative z-10 container mx-auto px-4 py-20">
+    <section
+      id="features-section"
+      class="relative z-10 container mx-auto px-4 py-20"
+    >
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-4">
-          Fonctionnalités Puissantes
+          {{ $t('landing.featuresTitle') }}
         </h2>
         <p class="text-xl text-gray-400">
-          Tout ce dont vous avez besoin pour gérer vos combattants
+          {{ $t('landing.featuresSubtitle') }}
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-red-600/50 transition-all">
           <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center mb-4">
-            <Icon name="lucide:bar-chart-3" class="w-6 h-6 text-red-400" />
+            <Icon
+              name="lucide:bar-chart-3"
+              class="w-6 h-6 text-red-400"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-2">Statistiques en temps réel</h3>
-          <p class="text-gray-400">Suivez les performances de vos combattants avec des analyses détaillées et des graphiques interactifs.</p>
+          <h3 class="text-xl font-bold mb-2">
+            {{ $t('landing.feature1Title') }}
+          </h3>
+          <p class="text-gray-400">
+            {{ $t('landing.feature1Desc') }}
+          </p>
         </div>
 
         <div class="rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-red-600/50 transition-all">
           <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center mb-4">
-            <Icon name="lucide:users" class="w-6 h-6 text-red-400" />
+            <Icon
+              name="lucide:users"
+              class="w-6 h-6 text-red-400"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-2">Gestion d'équipe</h3>
-          <p class="text-gray-400">Gérez facilement plusieurs combattants, ajoutez, modifiez et suivez leur progression.</p>
+          <h3 class="text-xl font-bold mb-2">
+            {{ $t('landing.feature2Title') }}
+          </h3>
+          <p class="text-gray-400">
+            {{ $t('landing.feature2Desc') }}
+          </p>
         </div>
 
         <div class="rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-red-600/50 transition-all">
           <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center mb-4">
-            <Icon name="lucide:trophy" class="w-6 h-6 text-red-400" />
+            <Icon
+              name="lucide:trophy"
+              class="w-6 h-6 text-red-400"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-2">Classements UFC</h3>
-          <p class="text-gray-400">Consultez les classements officiels et comparez vos combattants avec les meilleurs.</p>
+          <h3 class="text-xl font-bold mb-2">
+            {{ $t('landing.feature3Title') }}
+          </h3>
+          <p class="text-gray-400">
+            {{ $t('landing.feature3Desc') }}
+          </p>
         </div>
 
         <div class="rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-red-600/50 transition-all">
           <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center mb-4">
-            <Icon name="lucide:heart" class="w-6 h-6 text-red-400" />
+            <Icon
+              name="lucide:heart"
+              class="w-6 h-6 text-red-400"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-2">Favoris</h3>
-          <p class="text-gray-400">Marquez vos combattants préférés et accédez rapidement à leurs profils.</p>
+          <h3 class="text-xl font-bold mb-2">
+            {{ $t('landing.feature4Title') }}
+          </h3>
+          <p class="text-gray-400">
+            {{ $t('landing.feature4Desc') }}
+          </p>
         </div>
 
         <div class="rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-red-600/50 transition-all">
           <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center mb-4">
-            <Icon name="lucide:git-compare" class="w-6 h-6 text-red-400" />
+            <Icon
+              name="lucide:git-compare"
+              class="w-6 h-6 text-red-400"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-2">Comparaison</h3>
-          <p class="text-gray-400">Comparez deux combattants côte à côte pour analyser leurs statistiques.</p>
+          <h3 class="text-xl font-bold mb-2">
+            {{ $t('landing.feature5Title') }}
+          </h3>
+          <p class="text-gray-400">
+            {{ $t('landing.feature5Desc') }}
+          </p>
         </div>
 
         <div class="rounded-xl border border-gray-800 bg-gray-900/40 p-6 hover:border-red-600/50 transition-all">
           <div class="w-12 h-12 rounded-lg bg-red-600/20 flex items-center justify-center mb-4">
-            <Icon name="lucide:bell" class="w-6 h-6 text-red-400" />
+            <Icon
+              name="lucide:bell"
+              class="w-6 h-6 text-red-400"
+            />
           </div>
-          <h3 class="text-xl font-bold mb-2">Notifications</h3>
-          <p class="text-gray-400">Recevez des alertes sur les combats à venir et les performances de vos combattants.</p>
+          <h3 class="text-xl font-bold mb-2">
+            {{ $t('landing.feature6Title') }}
+          </h3>
+          <p class="text-gray-400">
+            {{ $t('landing.feature6Desc') }}
+          </p>
         </div>
       </div>
     </section>
 
     <!-- Fighters Section -->
-    <section id="fighters-section" class="relative z-10 container mx-auto px-4 py-20">
+    <section
+      id="fighters-section"
+      class="relative z-10 container mx-auto px-4 py-20"
+    >
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold mb-4">
-          Combattants en Vedette
+          {{ $t('landing.fightersTitle') }}
         </h2>
         <p class="text-xl text-gray-400">
-          Les meilleurs profils de votre plateforme
+          {{ $t('landing.fightersSubtitle') }}
         </p>
       </div>
 
@@ -282,14 +360,17 @@
     </section>
 
     <!-- Support Form Section -->
-    <section id="support-section" class="relative z-10 container mx-auto px-4 py-20">
+    <section
+      id="support-section"
+      class="relative z-10 container mx-auto px-4 py-20"
+    >
       <div class="max-w-2xl mx-auto">
         <div class="rounded-2xl border border-red-900/50 bg-linear-to-br from-gray-900/40 to-black/40 p-8 md:p-12">
           <h2 class="text-3xl font-bold mb-2">
-            Besoin d'aide ?
+            {{ $t('landing.needHelp') }}
           </h2>
           <p class="text-gray-400 mb-8">
-            Contactez notre équipe de support
+            {{ $t('landing.contactSupport') }}
           </p>
 
           <form
@@ -297,31 +378,31 @@
             @submit.prevent="handleSupportSubmit"
           >
             <div>
-              <label class="block text-sm font-medium mb-2">Nom</label>
+              <label class="block text-sm font-medium mb-2">{{ $t('landing.supportName') }}</label>
               <input
                 v-model="supportName"
                 type="text"
                 class="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-red-600"
-                placeholder="Votre nom"
+                :placeholder="$t('landing.supportNamePlaceholder')"
               >
             </div>
 
             <div>
-              <label class="block text-sm font-medium mb-2">Email</label>
+              <label class="block text-sm font-medium mb-2">{{ $t('landing.supportEmail') }}</label>
               <input
                 v-model="supportEmail"
                 type="email"
                 class="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-red-600"
-                placeholder="votre@email.com"
+                :placeholder="$t('landing.supportEmailPlaceholder')"
               >
             </div>
 
             <div>
-              <label class="block text-sm font-medium mb-2">Message</label>
+              <label class="block text-sm font-medium mb-2">{{ $t('landing.supportMessage') }}</label>
               <textarea
                 v-model="supportMessage"
                 class="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-red-600 resize-none h-32"
-                placeholder="Votre message..."
+                :placeholder="$t('landing.supportMessagePlaceholder')"
               />
             </div>
 
@@ -329,7 +410,7 @@
               type="submit"
               class="w-full bg-linear-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold py-3 rounded-lg transition transform hover:-translate-y-0.5"
             >
-              Envoyer
+              {{ $t('landing.supportSend') }}
             </button>
 
             <div
@@ -358,6 +439,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { athletesData } from '~/data/athletes.datas'
 
 interface Fighter {
@@ -368,10 +450,7 @@ interface Fighter {
   record: string
 }
 
-interface Highlight {
-  label: string
-  value: string
-}
+const { t: $t } = useI18n()
 
 const initializedfighters: Fighter[] = athletesData.slice(0, 6).map(athlete => ({
   id: Number(athlete.id),
@@ -383,11 +462,11 @@ const initializedfighters: Fighter[] = athletesData.slice(0, 6).map(athlete => (
 
 const fighters: Fighter[] = initializedfighters
 
-const highlights: Highlight[] = [
-  { label: 'Athlètes suivis', value: '+250' },
-  { label: 'Rapports mensuels', value: '98%' },
-  { label: 'Clubs actifs', value: '120' }
-]
+const highlights = computed(() => [
+  { label: $t('landing.trackedAthletes'), value: '+250' },
+  { label: $t('landing.monthlyReports'), value: '98%' },
+  { label: $t('landing.activeClusters'), value: '120' }
+])
 
 const liveStats = ref({
   activeFighters: 47,
@@ -398,9 +477,9 @@ const liveStats = ref({
   losses: 58
 })
 
-const categories = computed(() => ['Tous', ...new Set(fighters.map(f => f.category))])
+const categories = computed(() => [$t('landing.all'), ...new Set(fighters.map(f => f.category))])
 
-const selectedCategory = ref('Tous')
+const selectedCategory = ref($t('landing.all'))
 const isSidebarOpen = ref(false)
 const supportName = ref('')
 const supportEmail = ref('')
@@ -408,7 +487,7 @@ const supportMessage = ref('')
 const supportStatus = ref('')
 
 const filteredFighters = computed(() => {
-  return selectedCategory.value === 'Tous'
+  return selectedCategory.value === $t('landing.all')
     ? fighters
     : fighters.filter(f => f.category === selectedCategory.value)
 })
@@ -418,7 +497,7 @@ const emit = defineEmits<{
 }>()
 
 const handleSupportSubmit = () => {
-  supportStatus.value = 'Message envoyé ! Notre support revient vers vous rapidement.'
+  supportStatus.value = $t('landing.messageSent')
   supportName.value = ''
   supportEmail.value = ''
   supportMessage.value = ''

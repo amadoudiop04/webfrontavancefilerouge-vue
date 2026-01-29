@@ -3,13 +3,13 @@
     <NuxtLink
       to="/"
       class="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-gray-900/40"
-      aria-label="Accueil"
+      :aria-label="$t('common.home')"
     >
       <Icon
         name="lucide:home"
         class="w-4 h-4"
       />
-      <span class="font-medium">Accueil</span>
+      <span class="font-medium">{{ $t('common.home') }}</span>
     </NuxtLink>
 
     <template v-if="items.length > 0">

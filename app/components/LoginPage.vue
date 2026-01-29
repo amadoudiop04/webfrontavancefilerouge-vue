@@ -14,13 +14,21 @@
 
     <!-- Back to home button -->
     <div class="relative z-10 container mx-auto px-4 pt-6">
-      <NuxtLink
-        to="/"
-        class="inline-flex items-center gap-2 px-4 py-2 bg-gray-900/40 border border-gray-700 rounded-lg hover:bg-gray-800/60 hover:border-gray-600 transition-all text-gray-300 hover:text-white"
-      >
-        <Icon name="lucide:arrow-left" class="w-4 h-4" />
-        <span class="text-sm font-medium">Retour à l'accueil</span>
-      </NuxtLink>
+      <div class="flex justify-between items-center">
+        <NuxtLink
+          to="/"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-gray-900/40 border border-gray-700 rounded-lg hover:bg-gray-800/60 hover:border-gray-600 transition-all text-gray-300 hover:text-white"
+        >
+          <Icon
+            name="lucide:arrow-left"
+            class="w-4 h-4"
+          />
+          <span class="text-sm font-medium">{{ $t('common.backHome') }}</span>
+        </NuxtLink>
+
+        <!-- Language Switcher -->
+        <LanguageSwitcher />
+      </div>
     </div>
 
     <!-- Login Form -->
@@ -34,13 +42,18 @@
             <div
               class="relative flex items-center justify-center w-14 h-14 rounded-xl bg-linear-to-br from-red-600/40 via-red-700/30 to-red-900/40 border border-red-500/40 shadow-lg shadow-red-900/40"
             >
-              <Icon name="lucide:zap" class="w-7 h-7 text-red-400" />
+              <Icon
+                name="lucide:zap"
+                class="w-7 h-7 text-red-400"
+              />
             </div>
           </div>
 
-          <h1 class="text-3xl font-bold text-center mb-2">UFC Stats</h1>
+          <h1 class="text-3xl font-bold text-center mb-2">
+            UFC Stats
+          </h1>
           <p class="text-center text-gray-400 mb-8">
-            Gestionnaire de statistiques de combattants
+            {{ $t('auth.welcome') }}
           </p>
 
           <Form
@@ -51,7 +64,7 @@
           >
             <!-- Email -->
             <div>
-              <label class="block text-sm font-medium mb-2">Email</label>
+              <label class="block text-sm font-medium mb-2">{{ $t('auth.email') }}</label>
               <Field
                 v-slot="{ field, meta }"
                 name="email"
@@ -65,8 +78,8 @@
                       ? 'border-red-500 focus:border-red-600'
                       : 'border-gray-700 focus:border-red-600'
                   ]"
-                  placeholder="votre@email.com"
-                />
+                  placeholder="vous [at] email.com"
+                >
               </Field>
               <ErrorMessage
                 name="email"
@@ -76,7 +89,7 @@
 
             <!-- Password -->
             <div>
-              <label class="block text-sm font-medium mb-2">Mot de passe</label>
+              <label class="block text-sm font-medium mb-2">{{ $t('auth.password') }}</label>
               <Field
                 v-slot="{ field, meta }"
                 name="password"
@@ -92,7 +105,7 @@
                         : 'border-gray-700 focus:border-red-600'
                     ]"
                     placeholder="••••••••"
-                  />
+                  >
                   <button
                     type="button"
                     class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition"
@@ -118,7 +131,7 @@
 
             <!-- Name (for signup) -->
             <div v-if="isSignup">
-              <label class="block text-sm font-medium mb-2">Nom complet</label>
+              <label class="block text-sm font-medium mb-2">{{ $t('auth.fullName') }}</label>
               <Field
                 v-slot="{ field, meta }"
                 name="name"
@@ -132,8 +145,8 @@
                       ? 'border-red-500 focus:border-red-600'
                       : 'border-gray-700 focus:border-red-600'
                   ]"
-                  placeholder="Votre nom"
-                />
+                  :placeholder="$t('auth.yourName')"
+                >
               </Field>
               <ErrorMessage
                 name="name"
@@ -149,10 +162,10 @@
             >
               {{
                 isLoading
-                  ? "Chargement..."
+                  ? $t('common.loading')
                   : isSignup
-                    ? "Créer un compte"
-                    : "Se connecter"
+                    ? $t('auth.signUp')
+                    : $t('auth.signIn')
               }}
             </button>
 
@@ -162,14 +175,10 @@
               class="w-full text-center text-gray-400 hover:text-white transition"
               @click="toggleForm"
             >
-              <span v-if="isSignup"
-                >Vous avez déjà un compte ?
-                <span class="text-red-400">Se connecter</span></span
-              >
-              <span v-else
-                >Pas encore de compte ?
-                <span class="text-red-400">S'inscrire</span></span
-              >
+              <span v-if="isSignup">{{ $t('auth.alreadyHaveAccount') }}
+                <span class="text-red-400">{{ $t('auth.signIn') }}</span></span>
+              <span v-else>{{ $t('auth.noAccount') }}
+                <span class="text-red-400">{{ $t('auth.signUp') }}</span></span>
             </button>
           </Form>
         </div>
@@ -183,6 +192,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '~/stores/auth'
 import { useRouter } from 'vue-router'
 import { Form, Field, ErrorMessage } from 'vee-validate'
@@ -190,6 +200,7 @@ import * as yup from 'yup'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const { t: $t } = useI18n()
 
 const isSignup = ref(false)
 const isLoading = ref(false)
@@ -200,12 +211,12 @@ const validationSchema = computed(() => {
   const baseSchema = {
     email: yup
       .string()
-      .required('L\'adresse email est requise')
-      .email('Veuillez entrer une adresse email valide'),
+      .required($t('auth.emailRequired'))
+      .email($t('auth.invalidEmail')),
     password: yup
       .string()
-      .required('Le mot de passe est requis')
-      .min(6, 'Le mot de passe doit contenir au moins 6 caractères')
+      .required($t('auth.passwordRequired'))
+      .min(6, $t('auth.passwordMinLength'))
   }
 
   if (isSignup.value) {
@@ -213,8 +224,8 @@ const validationSchema = computed(() => {
       ...baseSchema,
       name: yup
         .string()
-        .required('Le nom complet est requis')
-        .min(2, 'Le nom doit contenir au moins 2 caractères')
+        .required($t('auth.nameRequired'))
+        .min(2, $t('auth.nameMinLength'))
     })
   }
 
@@ -225,7 +236,7 @@ const toggleForm = () => {
   isSignup.value = !isSignup.value
 }
 
-const handleSubmit = async (values: any) => {
+const handleSubmit = async (values: { email: string, password: string, name?: string }) => {
   isLoading.value = true
 
   try {

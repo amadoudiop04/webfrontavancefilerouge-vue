@@ -39,14 +39,14 @@
           name="lucide:home"
           class="w-4 h-4"
         />
-        Retour à l&apos;accueil
+        {{ $t('common.backHome') }}
       </button>
     </div>
 
     <!-- Fighters List -->
     <div class="bg-linear-to-br from-gray-800/40 to-gray-900/40 border border-gray-700/50 rounded-lg p-6">
       <h2 class="text-2xl font-bold mb-6">
-        Combattants
+        {{ $t('athlete.fighters') }}
       </h2>
       <div
         v-if="fightersStore.fighters.length > 0"
@@ -84,7 +84,7 @@
         v-else
         class="text-center py-8 text-gray-400"
       >
-        Aucun combattant pour le moment
+        {{ $t('athlete.noFighters') }}
       </div>
     </div>
   </div>
@@ -92,24 +92,20 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useFightersStore } from '~/stores/fighters'
-import { useAuthStore } from '~/stores/auth'
 import { TrendingUp, Zap, Trophy, Target } from 'lucide-vue-next'
 
 defineOptions({
   name: 'AppDashboard'
 })
 
-const emit = defineEmits<{
-  returnHome: []
-}>()
-
 defineProps<{
   onReturnHome?: () => void
 }>()
 
+const { t } = useI18n()
 const fightersStore = useFightersStore()
-const authStore = useAuthStore()
 
 const totalFighters = computed(() => fightersStore.fighters.length)
 const totalWins = computed(() => fightersStore.fighters.reduce((sum, f) => sum + (f.wins ?? 0), 0))
@@ -122,28 +118,28 @@ const winRate = computed(() => {
 
 const stats = computed(() => [
   {
-    label: 'Combattants Totaux',
+    label: t('dashboard.totalFighters'),
     value: totalFighters.value,
     icon: Trophy,
     color: 'text-red-600',
     bgColor: 'bg-red-600/10'
   },
   {
-    label: 'Victoires Cumulées',
+    label: t('dashboard.totalWins'),
     value: totalWins.value,
     icon: TrendingUp,
     color: 'text-green-600',
     bgColor: 'bg-green-600/10'
   },
   {
-    label: 'KOs Cumulés',
+    label: t('athlete.knockouts'),
     value: totalKnockouts.value,
     icon: Zap,
     color: 'text-yellow-600',
     bgColor: 'bg-yellow-600/10'
   },
   {
-    label: 'Taux de Victoire',
+    label: t('dashboard.avgWinRate'),
     value: `${winRate.value}%`,
     icon: Target,
     color: 'text-blue-600',

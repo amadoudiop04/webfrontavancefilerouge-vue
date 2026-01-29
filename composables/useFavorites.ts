@@ -9,7 +9,7 @@ export function useFavorites(storageKey: string) {
 
   // Load favorites from localStorage on mount
   onMounted(() => {
-    if (import.meta.client) {
+    if (typeof window !== 'undefined') {
       const stored = localStorage.getItem(storageKey)
       if (stored) {
         try {
@@ -26,7 +26,7 @@ export function useFavorites(storageKey: string) {
   watch(
     favorites,
     (newFavorites: string[]) => {
-      if (import.meta.client) {
+      if (typeof window !== 'undefined') {
         localStorage.setItem(storageKey, JSON.stringify(newFavorites))
       }
     },

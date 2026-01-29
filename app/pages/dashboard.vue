@@ -9,10 +9,10 @@
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
         <div>
           <h1 class="text-3xl md:text-4xl font-bold mb-2">
-            Bienvenue, {{ authStore.user?.name || 'Manager' }} 👋
+            {{ $t('dashboard.welcome', { name: authStore.user?.name || $t('dashboard.manager') }) }} 👋
           </h1>
           <p class="text-gray-400">
-            Gérez vos combattants UFC et suivez les statistiques en temps réel.
+            {{ $t('dashboard.subtitle') }}
           </p>
         </div>
 
@@ -52,7 +52,7 @@
             :name="`lucide:${item.icon}`"
             class="w-5 h-5"
           />
-          {{ item.label }}
+          {{ $t(item.i18nKey) }}
         </button>
       </div>
 
@@ -68,17 +68,17 @@
           <div class="mb-6 flex items-center justify-between gap-4">
             <div>
               <h2 class="text-2xl font-semibold mb-1">
-                Liste des Combattants
+                {{ $t('dashboard.fightersListTitle') }}
               </h2>
               <p class="text-gray-400 text-sm">
-                Ajoutez, modifiez et classez vos combattants en quelques clics.
+                {{ $t('dashboard.fightersListSubtitle') }}
               </p>
             </div>
             <button
               class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded font-semibold transition"
               @click="showAddModal = true"
             >
-              + Ajouter un Combattant
+              + {{ $t('athlete.addFighter') }}
             </button>
           </div>
           <FightersList />
@@ -88,10 +88,10 @@
         <div v-if="activeTab === 'athletes'">
           <div class="mb-6">
             <h2 class="text-2xl font-semibold mb-1">
-              Athlètes UFC
+              {{ $t('dashboard.athletesTitle') }}
             </h2>
             <p class="text-gray-400 text-sm">
-              Explorez les profils des combattants UFC, consultez leurs statistiques et classements.
+              {{ $t('dashboard.athletesSubtitle') }}
             </p>
           </div>
           <AthletesPage />
@@ -167,7 +167,7 @@
             <div class="rounded-2xl border border-gray-800 bg-gray-900/50 p-4 flex items-center justify-between shadow-lg shadow-black/30">
               <div>
                 <p class="text-gray-400 text-sm">
-                  Combattants suivis
+                  {{ $t('dashboard.trackedFighters') }}
                 </p>
                 <p class="text-2xl font-bold">
                   {{ fightersCount }}
@@ -199,7 +199,7 @@
             <div class="rounded-2xl border border-gray-800 bg-gray-900/50 p-4 flex items-center justify-between shadow-lg shadow-black/30">
               <div>
                 <p class="text-gray-400 text-sm">
-                  Favoris
+                  {{ $t('athlete.removeFromFavorites') }}
                 </p>
                 <p class="text-2xl font-bold text-red-400">
                   {{ favoritesCount }}
@@ -245,13 +245,16 @@
                   </div>
                   <div>
                     <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                      Informations personnelles
-                      <span v-if="!isEditingProfile" class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-green-600/20 text-green-400 border border-green-500/30">
-                        Vérifié
+                      {{ $t('dashboard.personalInfo') }}
+                      <span
+                        v-if="!isEditingProfile"
+                        class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-green-600/20 text-green-400 border border-green-500/30"
+                      >
+                        {{ $t('dashboard.verified') }}
                       </span>
                     </h3>
                     <p class="text-sm text-gray-400 mt-0.5">
-                      Gérez vos informations de profil manager
+                      {{ $t('dashboard.personalInfoDesc') }}
                     </p>
                   </div>
                 </div>
@@ -264,7 +267,7 @@
                     name="lucide:edit-3"
                     class="w-4 h-4 group-hover:text-red-400 transition-colors"
                   />
-                  Modifier
+                  {{ $t('common.edit') }}
                 </button>
               </div>
             </div>
@@ -281,7 +284,10 @@
                 <div class="rounded-xl border border-blue-900/30 bg-blue-950/20 p-4">
                   <div class="flex items-start gap-3">
                     <div class="w-8 h-8 rounded-lg bg-blue-600/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <Icon name="lucide:info" class="w-4 h-4 text-blue-400" />
+                      <Icon
+                        name="lucide:info"
+                        class="w-4 h-4 text-blue-400"
+                      />
                     </div>
                     <div class="flex-1 space-y-1">
                       <p class="text-sm font-semibold text-blue-300">
@@ -299,26 +305,26 @@
                   <div class="rounded-xl border border-gray-800/50 bg-gray-900/30 p-5 hover:border-gray-700/50 transition-colors">
                     <Input
                       v-model="profileFormData.name"
-                      label="Nom complet"
+                      :label="$t('dashboard.fullNameLabel')"
                       type="text"
-                      placeholder="Ex: Jean Dupont"
+                      :placeholder="$t('dashboard.fullNamePlaceholder')"
                       required
                       :error="profileErrors.name"
                       :success="profileFormData.name.length > 2 && !profileErrors.name"
-                      hint="Votre nom tel qu'il apparaîtra dans l'application"
+                      :hint="$t('dashboard.fullNameHint')"
                     />
                   </div>
-                  
+
                   <div class="rounded-xl border border-gray-800/50 bg-gray-900/30 p-5 hover:border-gray-700/50 transition-colors">
                     <Input
                       v-model="profileFormData.email"
-                      label="Adresse email"
+                      :label="$t('dashboard.emailLabel')"
                       type="email"
-                      placeholder="Ex: jean.dupont@example.com"
+                      :placeholder="$t('dashboard.emailPlaceholder')"
                       required
                       :error="profileErrors.email"
                       :success="isValidEmail(profileFormData.email) && !profileErrors.email"
-                      hint="Utilisé pour la connexion et les notifications"
+                      :hint="$t('dashboard.emailHint')"
                     />
                   </div>
                 </div>
@@ -334,7 +340,7 @@
                       name="lucide:x"
                       class="w-4 h-4"
                     />
-                    Annuler
+                    {{ $t('common.cancel') }}
                   </button>
                   <button
                     type="submit"
@@ -345,7 +351,7 @@
                       name="lucide:save"
                       class="w-4 h-4"
                     />
-                    Sauvegarder les modifications
+                    {{ $t('dashboard.saveChanges') }}
                   </button>
                 </div>
               </form>
@@ -358,11 +364,14 @@
                 <div class="rounded-xl border border-gray-800/50 bg-gray-900/30 p-5 hover:border-gray-700/50 transition-all group">
                   <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 rounded-lg bg-linear-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 flex items-center justify-center group-hover:border-red-600/30 transition-colors">
-                      <Icon name="lucide:user" class="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
+                      <Icon
+                        name="lucide:user"
+                        class="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors"
+                      />
                     </div>
                     <div class="flex-1">
                       <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">
-                        Nom complet
+                        {{ $t('dashboard.fullNameLabel') }}
                       </p>
                       <p class="text-lg font-bold text-white mt-0.5">
                         {{ authStore.user.name }}
@@ -375,11 +384,14 @@
                 <div class="rounded-xl border border-gray-800/50 bg-gray-900/30 p-5 hover:border-gray-700/50 transition-all group">
                   <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 rounded-lg bg-linear-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/50 flex items-center justify-center group-hover:border-red-600/30 transition-colors">
-                      <Icon name="lucide:mail" class="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
+                      <Icon
+                        name="lucide:mail"
+                        class="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors"
+                      />
                     </div>
                     <div class="flex-1">
                       <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">
-                        Adresse email
+                        {{ $t('dashboard.emailLabel') }}
                       </p>
                       <p class="text-lg font-bold text-white mt-0.5 truncate">
                         {{ authStore.user.email }}
@@ -391,15 +403,24 @@
               </div>
 
               <!-- Info Footer in view mode -->
-              <div v-if="!isEditingProfile" class="mt-6 pt-6 border-t border-gray-800/50">
+              <div
+                v-if="!isEditingProfile"
+                class="mt-6 pt-6 border-t border-gray-800/50"
+              >
                 <div class="flex items-center justify-between text-xs text-gray-500">
                   <div class="flex items-center gap-2">
-                    <Icon name="lucide:shield-check" class="w-4 h-4 text-green-500" />
-                    <span>Profil vérifié et sécurisé</span>
+                    <Icon
+                      name="lucide:shield-check"
+                      class="w-4 h-4 text-green-500"
+                    />
+                    <span>{{ $t('dashboard.profileSecured') }}</span>
                   </div>
                   <div class="flex items-center gap-2">
-                    <Icon name="lucide:clock" class="w-4 h-4" />
-                    <span>Dernière modification: Aujourd'hui</span>
+                    <Icon
+                      name="lucide:clock"
+                      class="w-4 h-4"
+                    />
+                    <span>{{ $t('dashboard.lastModified') }}</span>
                   </div>
                 </div>
               </div>
@@ -416,10 +437,10 @@
                 />
                 <div>
                   <h3 class="text-xl font-semibold">
-                    Mes Favoris
+                    {{ $t('dashboard.myFavorites') }}
                   </h3>
                   <p class="text-gray-400 text-sm">
-                    Vos combattants préférés ({{ athletesStore.favoriteAthletes.length }})
+                    {{ $t('dashboard.myFavoritesSubtitle', { count: athletesStore.favoriteAthletes.length }) }}
                   </p>
                 </div>
               </div>
@@ -431,7 +452,7 @@
                   name="lucide:plus"
                   class="w-4 h-4"
                 />
-                Ajouter
+                {{ $t('common.add') }}
               </button>
             </CardHeader>
             <CardContent>
@@ -469,13 +490,13 @@
                     </div>
                   </div>
                   <div class="flex items-center justify-between text-sm">
-                    <span class="text-gray-400">Record</span>
+                    <span class="text-gray-400">{{ $t('athlete.record') }}</span>
                     <span class="text-white font-semibold">
                       {{ athlete.record.wins }}-{{ athlete.record.losses }}
                     </span>
                   </div>
                   <div class="flex items-center justify-between text-sm mt-1">
-                    <span class="text-gray-400">KOs</span>
+                    <span class="text-gray-400">{{ $t('athlete.knockouts') }}</span>
                     <span class="text-red-600 font-semibold">
                       {{ athlete.knockouts }}
                     </span>
@@ -505,12 +526,14 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '~/stores/auth'
 import { useFightersStore } from '~/stores/fighters'
 import { useAthletesStore } from '~/stores/athletes'
 
 const router = useRouter()
 const route = useRoute()
+const { t: $t } = useI18n()
 const authStore = useAuthStore()
 const fightersStore = useFightersStore()
 const athletesStore = useAthletesStore()
@@ -534,14 +557,14 @@ const athletesCount = computed(() => athletesStore.athletes.length)
 const favoritesCount = computed(() => athletesStore.favoriteAthletes.length)
 
 const navigationItems = [
-  { id: 'dashboard', label: 'Tableau de Bord', icon: 'bar-chart-3' },
-  { id: 'fighters', label: 'Combattants', icon: 'users' },
-  { id: 'athletes', label: 'Athlètes UFC', icon: 'trophy' },
-  { id: 'profile', label: 'Profil', icon: 'user' }
+  { id: 'dashboard', i18nKey: 'nav.dashboard', icon: 'bar-chart-3' },
+  { id: 'fighters', i18nKey: 'athlete.fighters', icon: 'users' },
+  { id: 'athletes', i18nKey: 'athlete.athletes', icon: 'trophy' },
+  { id: 'profile', i18nKey: 'dashboard.profile', icon: 'user' }
 ]
 
 const breadcrumbItems = computed(() => [
-  { label: 'Tableau de bord' }
+  { label: $t('nav.dashboard') }
 ])
 
 const initials = computed(() => {
@@ -564,12 +587,12 @@ const validateProfileForm = () => {
   let isValid = true
 
   if (!profileFormData.value.name || profileFormData.value.name.trim().length < 2) {
-    profileErrors.value.name = 'Le nom doit contenir au moins 2 caractères'
+    profileErrors.value.name = $t('dashboard.nameError')
     isValid = false
   }
 
   if (!profileFormData.value.email || !isValidEmail(profileFormData.value.email)) {
-    profileErrors.value.email = 'Veuillez entrer une adresse email valide'
+    profileErrors.value.email = $t('dashboard.emailError')
     isValid = false
   }
 
