@@ -2,6 +2,8 @@
 
 Application moderne de gestion et de suivi des statistiques de combattants UFC, développée avec Nuxt 4, Vue 3 et TypeScript.
 
+![alt text](image.png)
+
 ## 🚀 Fonctionnalités
 
 - 📊 Tableau de bord avec statistiques en temps réel
