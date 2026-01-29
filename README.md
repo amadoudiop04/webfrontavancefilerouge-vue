@@ -77,10 +77,10 @@ pnpm postinstall      # Préparer Nuxt après installation
 
 ## Notez bien 
 ```
-Pour tester les fonctionnalités du mode admin assure vous d'acceder au 
-fichier ath.js dans store puis assure toi de changer la valeur du variable isAdmin en true .
--->  isAdmin: true
+Pour tester les fonctionnalités du mode administrateur, assure-toi d’accéder au fichier auth.js dans le dossier store, puis de modifier la valeur de la variable isAdmin en la passant à true.
 
+→ isAdmin: true
+```
 
  ## Retrouvez moi sur linkedin
  https://www.linkedin.com/in/amadou-diop-3a5258316/
