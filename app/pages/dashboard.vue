@@ -76,6 +76,44 @@
           <AthletesPage />
         </div>
 
+        <!-- Forum Tab -->
+        <div v-if="activeTab === 'forum'">
+          <div class="min-h-screen">
+            <div class="max-w-4xl mx-auto">
+              <!-- Header -->
+              <div class="mb-8">
+                <h1 class="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                  <Icon name="lucide:message-square" class="w-8 h-8 text-red-500" />
+                  Forum UFC
+                </h1>
+                <p class="text-gray-400">Partagez vos opinions et discutez avec la communauté</p>
+              </div>
+
+              <!-- Create Post Section -->
+              <CreatePost />
+
+              <!-- Posts Feed -->
+              <div class="space-y-6 mt-6">
+                <PostCard
+                  v-for="post in forumStore.sortedPosts"
+                  :key="post.id"
+                  :post="post"
+                />
+
+                <!-- Empty State -->
+                <div
+                  v-if="forumStore.sortedPosts.length === 0"
+                  class="text-center py-16"
+                >
+                  <Icon name="lucide:message-circle" class="w-16 h-16 text-gray-700 mx-auto mb-4" />
+                  <p class="text-gray-400 text-lg">Aucun post pour le moment</p>
+                  <p class="text-gray-500 text-sm">Soyez le premier à partager quelque chose !</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Profile Tab -->
         <div
           v-if="activeTab === 'profile' && authStore.user"
@@ -529,6 +567,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '~/stores/auth'
 import { useFightersStore } from '~/stores/fighters'
 import { useAthletesStore } from '~/stores/athletes'
+import { useForumStore } from '~/stores/forum'
 
 const router = useRouter()
 const route = useRoute()
@@ -536,13 +575,14 @@ const { t: $t } = useI18n()
 const authStore = useAuthStore()
 const fightersStore = useFightersStore()
 const athletesStore = useAthletesStore()
+const forumStore = useForumStore()
 
 const activeTab = ref('dashboard')
 
 // Restaurer l'onglet depuis l'URL au montage
 onMounted(() => {
   const tabFromQuery = route.query.tab as string
-  if (tabFromQuery && ['dashboard', 'athletes', 'profile'].includes(tabFromQuery)) {
+  if (tabFromQuery && ['dashboard', 'athletes', 'forum', 'profile'].includes(tabFromQuery)) {
     activeTab.value = tabFromQuery
   }
 })
@@ -558,6 +598,7 @@ const favoritesCount = computed(() => athletesStore.favoriteAthletes.length)
 const navigationItems = [
   { id: 'dashboard', i18nKey: 'nav.dashboard', icon: 'bar-chart-3' },
   { id: 'athletes', i18nKey: 'athlete.athletes', icon: 'trophy' },
+  { id: 'forum', i18nKey: 'nav.forum', icon: 'message-square' },
   { id: 'profile', i18nKey: 'dashboard.profile', icon: 'user' }
 ]
 

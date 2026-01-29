@@ -596,7 +596,7 @@ const selectedWeightClass = ref('')
 const showCompareModal = ref(false)
 const showAddModal = ref(false)
 const showEditModal = ref(false)
-const selectedFighter = ref(null)
+const selectedFighter = ref<Athlete | null>(null)
 
 const filteredAthletes = computed(() => {
   return athletesStore.searchAthletes(searchQuery.value, selectedWeightClass.value || undefined)
@@ -607,7 +607,7 @@ const clearFilters = () => {
   selectedWeightClass.value = ''
 }
 
-const selectAthlete = (athlete) => {
+const selectAthlete = (athlete: Athlete) => {
   athletesStore.setSelectedAthlete(athlete)
 }
 
@@ -615,12 +615,12 @@ const deselectAthlete = () => {
   athletesStore.setSelectedAthlete(null)
 }
 
-const handleEdit = (fighter) => {
+const handleEdit = (fighter: Athlete) => {
   selectedFighter.value = fighter
   showEditModal.value = true
 }
 
-const handleDelete = (id) => {
+const handleDelete = (id: string) => {
   if (confirm('Êtes-vous sûr de vouloir supprimer ce combattant ?')) {
     athletesStore.removeFighter(id)
   }

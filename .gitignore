@@ -22,14 +22,13 @@ lerna-debug.log*
 .DS_Store
 .fleet
 .idea
+
+# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
-
-# Local env files
-.env
-.env.*
-!.env.example
+!.vscode/launch.json
+!.vscode/tasks.json
 
 # Editor directories and files
 *.suo
@@ -46,14 +45,18 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+*~
 
 # Tests
 coverage
 *.lcov
 .nyc_output
+test-results/
+playwright-report/
 
 # TypeScript
 *.tsbuildinfo
+next-env.d.ts
 
 # Package manager lock files (keep pnpm-lock.yaml as you're using pnpm)
 package-lock.json
@@ -64,3 +67,56 @@ yarn.lock
 *.temp
 .temp/
 .tmp/
+
+# Build artifacts
+*.map
+*.css.map
+*.js.map
+
+# IDE
+*.swp
+*.swo
+*.swn
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.history/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Debug
+debug.log
+chrome-debug.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Optional REPL history
+.node_repl_history
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Storybook
+storybook-static
+
+# Sentry
+.sentryclirc

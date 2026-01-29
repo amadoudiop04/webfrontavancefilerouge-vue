@@ -28,6 +28,18 @@
 
         <!-- Right side: user + logout -->
         <div class="flex items-center gap-2 sm:gap-4">
+          <!-- Forum Link -->
+          <NuxtLink
+            to="/forum"
+            class="flex items-center gap-2 px-3 py-2 sm:px-4 hover:bg-red-600/10 hover:border-red-600/50 hover:text-red-400 transition-all duration-200 border border-gray-700/50 rounded-lg"
+          >
+            <Icon
+              name="lucide:message-square"
+              class="w-4 h-4 shrink-0"
+            />
+            <span class="hidden sm:inline text-sm font-medium">{{ $t('nav.forum') }}</span>
+          </NuxtLink>
+
           <!-- Dashboard Link -->
           <NuxtLink
             v-if="authStore.user"

@@ -358,7 +358,7 @@ export const athletesData = [
     "ranking": 4,
     "status": "Actif",
     "inCompetition": true,
-    "image": "https://s.yimg.com/ny/api/res/1.2/2sUto5W9Twt05QeiRoELYQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ0NDtjZj13ZWJw/https://s.yimg.com/os/creatr-uploaded-images/2023-01/734e6ca0-aa92-11ed-b7e9-3ee42c9d9c13"
+    "image": "https://preview.redd.it/jiri-prochazka-hasnt-fought-to-a-decision-in-nine-years-v0-pld9uya7z1uf1.jpeg?auto=webp&s=7da8f276773e384ed95d4757e9a370a50aba16f5"
   },
   {
     "id": "19",
