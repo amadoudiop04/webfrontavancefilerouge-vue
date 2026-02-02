@@ -38,7 +38,7 @@
           <button
             v-if="athletesStore.compareList.length > 0"
             class="px-3 py-2 bg-gray-800/60 border border-gray-700 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition text-sm"
-            title="Réinitialiser la sélection"
+            :title="$t('athletesPage.resetSelection')"
             @click="athletesStore.clearCompare()"
           >
             <Icon
@@ -78,12 +78,13 @@
               <option value="">
                 {{ $t('athletesPage.allCategories') }}
               </option>
-              <option>Poids plume</option>
-              <option>Poids léger</option>
-              <option>Poids welter</option>
-              <option>Poids moyen</option>
-              <option>Poids lourd léger</option>
-              <option>Poids lourd</option>
+              <option
+                v-for="option in weightClassOptions"
+                :key="option.value"
+                :value="option.value"
+              >
+                {{ option.label }}
+              </option>
             </select>
             <Icon
               name="lucide:chevron-down"
@@ -93,7 +94,7 @@
           <button
             v-if="searchQuery || selectedWeightClass"
             class="px-3 py-2.5 bg-gray-800/60 border border-gray-700 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition flex items-center gap-2 whitespace-nowrap"
-            title="Réinitialiser les filtres"
+            :title="$t('athletesPage.resetFilters')"
             @click="clearFilters"
           >
             <Icon
@@ -128,7 +129,7 @@
             name="lucide:layers"
             class="w-3 h-3"
           />
-          {{ selectedWeightClass }}
+          {{ translateWeightClass(selectedWeightClass) }}
         </span>
       </div>
     </div>
@@ -166,7 +167,7 @@
           <button
             class="absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center bg-gray-900/80 backdrop-blur-sm border-2 transition hover:scale-110 shadow-lg"
             :class="athletesStore.isFavorite(athlete.id) ? 'border-red-600 text-red-600' : 'border-gray-700 text-gray-400'"
-            :title="athletesStore.isFavorite(athlete.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'"
+            :title="athletesStore.isFavorite(athlete.id) ? $t('athlete.removeFromFavorites') : $t('athlete.addToFavorites')"
             @click.stop="athletesStore.toggleFavorite(athlete.id)"
           >
             <Icon
@@ -188,7 +189,7 @@
               {{ athlete.nickname }}
             </p>
             <p class="text-xs text-gray-500 mt-2">
-              {{ athlete.weightClass }}
+              {{ translateWeightClass(athlete.weightClass) }}
             </p>
             <div class="mt-4 space-y-1 text-sm">
               <div class="flex justify-between">
@@ -586,11 +587,15 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useAthletesStore } from '~/stores/athletes'
 import { useAuthStore } from '~/stores/auth'
+import type { Athlete } from '~/stores/athletes'
+import { WEIGHT_CLASS_KEY_MAP, translateI18nValue } from '~/utils/i18nMaps'
 
 const authStore = useAuthStore()
 const athletesStore = useAthletesStore()
+const { t: $t } = useI18n()
 const searchQuery = ref('')
 const selectedWeightClass = ref('')
 const showCompareModal = ref(false)
@@ -601,6 +606,15 @@ const selectedFighter = ref<Athlete | null>(null)
 const filteredAthletes = computed(() => {
   return athletesStore.searchAthletes(searchQuery.value, selectedWeightClass.value || undefined)
 })
+
+const weightClassOptions = computed(() =>
+  Object.entries(WEIGHT_CLASS_KEY_MAP).map(([value, key]) => ({
+    value,
+    label: $t(key)
+  }))
+)
+
+const translateWeightClass = (value: string) => translateI18nValue(value, $t, WEIGHT_CLASS_KEY_MAP)
 
 const clearFilters = () => {
   searchQuery.value = ''
@@ -621,7 +635,7 @@ const handleEdit = (fighter: Athlete) => {
 }
 
 const handleDelete = (id: string) => {
-  if (confirm('Êtes-vous sûr de vouloir supprimer ce combattant ?')) {
+  if (confirm($t('athlete.deleteConfirmation'))) {
     athletesStore.removeFighter(id)
   }
 }

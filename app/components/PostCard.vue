@@ -70,7 +70,7 @@
         />
         <span class="text-sm font-medium">{{ post.likes.length }}</span>
       </button>
-      <!-- Like count only for non-authenticated users -->
+      <!-- Like count -->
       <div
         v-else
         class="flex items-center gap-2 text-gray-400"
@@ -221,7 +221,7 @@
         </div>
       </div>
 
-      <!-- Login prompt for non-authenticated users -->
+      <!-- Login for non-authenticated users -->
       <div
         v-else
         class="px-6 py-4 border-t border-gray-800"

@@ -1,5 +1,4 @@
 <template>
-  <!-- Only show if user is authenticated -->
   <div
     v-if="authStore.isAuthenticated"
     class="bg-linear-to-br from-gray-900/95 to-black/95 border border-gray-800 rounded-2xl p-6 shadow-xl shadow-red-900/10"

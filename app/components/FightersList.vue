@@ -40,7 +40,7 @@
             v-if="fighter.weight"
             class="text-sm text-gray-400 mb-4"
           >
-            {{ fighter.weight }}
+            {{ translateWeightClass(fighter.weight) }}
           </p>
 
           <div class="space-y-2 mb-4">
@@ -106,12 +106,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useFightersStore } from '~/stores/fighters'
 import type { Fighter } from '~/stores/fighters'
+import { WEIGHT_CLASS_KEY_MAP, translateI18nValue } from '~/utils/i18nMaps'
 
 const fightersStore = useFightersStore()
+const { t: $t } = useI18n()
 const showEditModal = ref(false)
 const selectedFighter = ref<Fighter | null>(null)
+
+const translateWeightClass = (value: string) => translateI18nValue(value, $t, WEIGHT_CLASS_KEY_MAP)
 
 const handleEdit = (fighter: Fighter) => {
   selectedFighter.value = fighter

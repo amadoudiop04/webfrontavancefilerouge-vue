@@ -26,7 +26,6 @@
           </div>
         </button>
 
-        <!-- Right side: user + logout -->
         <div class="flex items-center gap-2 sm:gap-4">
           <!-- Forum Link -->
           <NuxtLink
@@ -78,7 +77,6 @@
             {{ initials }}
           </div>
 
-          <!-- Language Switcher - Always visible -->
           <LanguageSwitcher />
 
           <button

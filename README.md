@@ -1,86 +1,134 @@
-# UFC Stats - Application de gestion de combattants
+﻿# 🥊 UFC Stats Manager
 
-Application moderne de gestion et de suivi des statistiques de combattants UFC, développée avec Nuxt 4, Vue 3 et TypeScript.
+> **Plateforme complète de gestion et d'analyse des statistiques de combattants UFC**
 
-![alt text](image.png)
+Une application web moderne conçue pour gérer, suivre et analyser les performances de vos combattants UFC avec des visualisations avancées et une expérience utilisateur optimale.
 
-## 🚀 Fonctionnalités
+![UFC Stats Manager](image.png)
 
-- 📊 Tableau de bord avec statistiques en temps réel
-- 🥊 Gestion complète des combattants (CRUD)
-- ⭐ Système de favoris persistant
-- 🔄 Comparaison d'athlètes (jusqu'à 2)
-- 🔍 Recherche et filtres avancés
-- 📱 Design responsive et moderne
-- 🎨 Interface utilisateur avec Tailwind CSS
-- 💾 Persistance des données avec localStorage
+---
 
-## 🛠️ Technologies utilisées
+## ✨ Fonctionnalités Principales
 
-- **Framework**: [Nuxt 4](https://nuxt.com/)
-- **UI**: [Nuxt UI](https://ui.nuxt.com/) & [Tailwind CSS](https://tailwindcss.com/)
-- **State Management**: [Pinia](https://pinia.vuejs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Icons**: [Lucide Icons](https://lucide.dev/)
-- **Package Manager**: [pnpm](https://pnpm.io/)
+### 📊 Tableau de Bord Intuitif
+- Statistiques en temps réel de vos combattants
+- Vue d'ensemble des performances globales
+- Graphiques interactifs et indicateurs clés (KPI)
+- Indicateurs de tendances (↑ ↓)
 
-## 📦 Installation
+### 🥊 Gestion Complète des Combattants
+- **CRUD Complet** : Créer, lire, modifier, supprimer des combattants
+- **Profils Détaillés** : Nom, surnom, palmarès, statistiques
+- **Classification** : Catégories de poids, classement UFC
+- **Suivi d'État** : Actif, blessé, retraité, en pause
 
-```bash
-# Cloner le repository
+### ⭐ Système de Favoris
+- Marquer vos combattants préférés
+- Accès rapide à vos favoris
+
+### 🔄 Comparaison d'Athlètes
+- Comparer jusqu'à 2 combattants côte à côte
+- Analyse comparative des statistiques
+
+### 🔍 Recherche et Filtrage Avancés
+- Recherche par nom / surnom
+- Filtrage par catégorie de poids
+- Filtrage par pays d'origine
+- Filtrage par statut
+
+### 🌍 Support Multilingue (i18n)
+- **Français** (Défaut) 🇫🇷
+- **Anglais** 🇺🇸
+- Changement de langue instantané
+
+### 📱 Design Responsive & Moderne
+- Adaptable à tous les appareils
+
+## 🛠️ Stack Technique
+
+| Technologie | Utilisation |
+|-------------|-------------|
+| **Nuxt 4.3.0** | Framework Vue fullstack |
+| **Vue 3.5.27** | Framework UI réactif |
+| **TypeScript** | Typage statique |
+| **Tailwind CSS** | Styling utilitaire |
+| **Pinia** | Gestion d'état centralisée |
+| **Vue i18n** | Internationalisation multilingue |
+| **Lucide Icons** | Iconographie moderne |
+
+---
+
+## 🚀 Démarrage Rapide
+
+### Prérequis
+- **Node.js** ≥ 18.0.0
+- **pnpm** ≥ 8.0.0
+
+### Installation
+
+\\\bash
+# 1️⃣ Cloner le repository
 git clone https://github.com/amadoudiop04/webfrontavancefilerouge-vue.git
+cd webfrontavancefilerouge-vue
 
-# Installer les dépendances
+# 2️⃣ Installer les dépendances
 pnpm install
 
-# Lancer le serveur de développement
+# 3️⃣ Lancer le serveur de développement
 pnpm dev
-```
+\\\
 
-Le serveur sera accessible sur `http://localhost:3000`
+✅ Accédez à **http://localhost:3000**
 
-## 🏗️ Structure du projet
+---
 
-```
-webfrontavance-vue/
-├── app/
-│   ├── components/        # Composants Vue réutilisables
-│   │   ├── ui/           # Composants UI de base
-│   │   └── ...           # Composants métier
-│   ├── pages/            # Pages de l'application
-│   ├── stores/           # Stores Pinia pour la gestion d'état
-│   ├── assets/           # Assets statiques (CSS, images)
-│   └── utils/            # Fonctions utilitaires
-├── composables/          # Composables Vue réutilisables
-├── plugins/              # Plugins Nuxt
-├── types/                # Déclarations de types TypeScript
-└── nuxt.config.ts        # Configuration Nuxt
-```
+## 📜 Scripts NPM
 
-## 📜 Scripts disponibles
-
-```bash
-# Développement
+\\\bash
 pnpm dev              # Démarrer le serveur de développement
-
-# Production
 pnpm build            # Build de production
-pnpm preview          # Preview du build de production
+pnpm preview          # Prévisualiser le build
+\\\
 
-# Qualité de code
-pnpm lint             # Linter le code
-pnpm typecheck        # Vérifier les types TypeScript
+---
 
-# Autres
-pnpm postinstall      # Préparer Nuxt après installation
-```
+## 👨‍💼 Mode Administrateur
 
-## Notez bien 
-```
-Pour tester les fonctionnalités du mode administrateur, assure-toi d’accéder au fichier auth.js dans le dossier store, puis de modifier la valeur de la variable isAdmin en la passant à true.
+Pour tester les fonctionnalités admin :
 
-→ isAdmin: true
-```
+1. Ouvrez \app/stores/auth.ts\
+2. Changez \isAdmin: false\ → \isAdmin: true\
 
- ## Retrouvez moi sur linkedin
- https://www.linkedin.com/in/amadou-diop-3a5258316/
+---
+
+## 🐛 Dépannage
+
+### Les traductions ne s'affichent pas
+- Vérifiez les fichiers \locales/fr.json\ et \locales/en.json\
+- Redémarrez le serveur : \pnpm dev\
+- Videz le cache du navigateur
+
+### Le serveur ne démarre pas
+\\\bash
+rm -rf .nuxt
+pnpm install
+pnpm dev
+\\\
+
+---
+
+## 📚 Documentation
+
+- 📖 [Nuxt Docs](https://nuxt.com/docs)
+- 🎨 [Tailwind CSS](https://tailwindcss.com/)
+- 🏪 [Pinia](https://pinia.vuejs.org/)
+- 🌍 [Vue i18n](https://vue-i18n.intlify.dev/)
+
+---
+
+## 👨‍💻 Auteur
+
+**Amadou Diop**
+
+- 💼 [LinkedIn](https://www.linkedin.com/in/amadou-diop-3a5258316/)
+- 🐙 [GitHub](https://github.com/amadoudiop04)

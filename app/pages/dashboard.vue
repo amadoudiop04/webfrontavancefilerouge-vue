@@ -106,7 +106,7 @@
                   class="text-center py-16"
                 >
                   <Icon name="lucide:message-circle" class="w-16 h-16 text-gray-700 mx-auto mb-4" />
-                  <p class="text-gray-400 text-lg">Aucun post pour le moment</p>
+                  <p class="text-gray-400 text-lg">{{ $t('forum.noPostsYet') }}</p>
                   <p class="text-gray-500 text-sm">Soyez le premier à partager quelque chose !</p>
                 </div>
               </div>
@@ -539,7 +539,7 @@
                     </span>
                   </div>
                   <span class="mt-3 inline-block px-2 py-1 bg-red-600/20 text-red-600 rounded-full text-xs font-semibold">
-                    {{ athlete.weightClass }}
+                    {{ translateWeightClass(athlete.weightClass) }}
                   </span>
                 </div>
               </div>
@@ -568,11 +568,14 @@ import { useAuthStore } from '~/stores/auth'
 import { useFightersStore } from '~/stores/fighters'
 import { useAthletesStore } from '~/stores/athletes'
 import { useForumStore } from '~/stores/forum'
+import { WEIGHT_CLASS_KEY_MAP, translateI18nValue } from '~/utils/i18nMaps'
 
 const router = useRouter()
 const route = useRoute()
 const { t: $t } = useI18n()
 const authStore = useAuthStore()
+
+const translateWeightClass = (value: string) => translateI18nValue(value, $t, WEIGHT_CLASS_KEY_MAP)
 const fightersStore = useFightersStore()
 const athletesStore = useAthletesStore()
 const forumStore = useForumStore()

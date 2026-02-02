@@ -1,13 +1,3 @@
-/**
- * Script utilitaire pour gérer les données des athlètes
- * Usage: node scripts/manage-athletes.js [command]
- *
- * Commands:
- *   validate  - Valider le fichier athletes.json
- *   backup    - Créer une sauvegarde
- *   add       - Ajouter un nouvel athlète (interactif)
- */
-
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'

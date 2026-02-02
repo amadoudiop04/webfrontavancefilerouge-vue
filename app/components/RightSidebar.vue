@@ -14,7 +14,7 @@
     @click="$emit('close')"
   />
 
-  <!-- Sidebar avec design oblique -->
+  <!-- Sidebar gestion -->
   <aside
     :class="[
       'fixed top-0 right-0 h-full w-96 z-50 transition-transform duration-300 ease-in-out',

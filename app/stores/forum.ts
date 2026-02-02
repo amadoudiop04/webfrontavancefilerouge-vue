@@ -30,7 +30,7 @@ export const useForumStore = defineStore('forum', () => {
       userId: 'user1',
       userName: 'Alex Johnson',
       userAvatar: 'https://i.pravatar.cc/150?img=12',
-      content: 'Quelle victoire incroyable hier soir ! Le combat était spectaculaire 🔥',
+      content: 'What an incredible victory last night! The fight was spectacular 🔥',
       createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
       likes: ['user2', 'user3'],
       comments: [
@@ -40,7 +40,7 @@ export const useForumStore = defineStore('forum', () => {
           userId: 'user2',
           userName: 'Sarah Martin',
           userAvatar: 'https://i.pravatar.cc/150?img=5',
-          content: 'Complètement d\'accord ! Un des meilleurs combats de l\'année',
+          content: 'Absolutely agree! One of the best fights of the year',
           createdAt: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString()
         }
       ]
@@ -50,7 +50,7 @@ export const useForumStore = defineStore('forum', () => {
       userId: 'user2',
       userName: 'Sarah Martin',
       userAvatar: 'https://i.pravatar.cc/150?img=5',
-      content: 'Qui va gagner le prochain combat ? J\'ai hâte de voir ça ! 🥊',
+      content: 'Who will win the next fight? I can\'t wait to see it! 🥊',
       image: 'https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=800&q=80',
       createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
       likes: ['user1'],
@@ -61,7 +61,7 @@ export const useForumStore = defineStore('forum', () => {
       userId: 'user3',
       userName: 'Marcus Rodriguez',
       userAvatar: 'https://i.pravatar.cc/150?img=33',
-      content: 'Les statistiques de ce combattant sont impressionnantes ! 15 victoires consécutives, dont 12 par KO 💪 Il mérite vraiment le titre',
+      content: 'The statistics of this fighter are impressive! 15 consecutive wins, 12 by KO 💪 He really deserves the title',
       createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
       likes: ['user1', 'user2', 'user4', 'user5'],
       comments: [
@@ -71,7 +71,7 @@ export const useForumStore = defineStore('forum', () => {
           userId: 'user1',
           userName: 'Alex Johnson',
           userAvatar: 'https://i.pravatar.cc/150?img=12',
-          content: 'Absolument ! Sa technique de frappe est redoutable',
+          content: 'Absolutely! His striking technique is formidable',
           createdAt: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString()
         },
         {
@@ -80,7 +80,7 @@ export const useForumStore = defineStore('forum', () => {
           userId: 'user4',
           userName: 'Emma Davis',
           userAvatar: 'https://i.pravatar.cc/150?img=47',
-          content: 'J\'attends son prochain combat avec impatience !',
+          content: 'I\'m waiting for his next fight eagerly!',
           createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString()
         }
       ]
@@ -90,7 +90,7 @@ export const useForumStore = defineStore('forum', () => {
       userId: 'user4',
       userName: 'Emma Davis',
       userAvatar: 'https://i.pravatar.cc/150?img=47',
-      content: 'Regardez cette photo de l\'entraînement d\'hier ! L\'intensité est au maximum 🏋️‍♂️ #UFC #Training',
+      content: 'Check out this training photo from yesterday! Intensity is at maximum 🏋️‍♂️ #UFC #Training',
       image: 'https://images.unsplash.com/photo-1517438476312-10d79c077509?w=800&q=80',
       createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(),
       likes: ['user1', 'user2', 'user3'],
@@ -101,7 +101,7 @@ export const useForumStore = defineStore('forum', () => {
           userId: 'user2',
           userName: 'Sarah Martin',
           userAvatar: 'https://i.pravatar.cc/150?img=5',
-          content: 'Incroyable niveau de préparation ! 👏',
+          content: 'Incredible training level! 👏',
           createdAt: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString()
         }
       ]
@@ -111,7 +111,7 @@ export const useForumStore = defineStore('forum', () => {
       userId: 'user5',
       userName: 'Karim Benzema',
       userAvatar: 'https://i.pravatar.cc/150?img=68',
-      content: 'Le classement poids léger vient d\'être mis à jour ! Qui selon vous mérite la prochaine chance au titre ? 🏆 Donnez vos prédictions !',
+      content: 'The lightweight ranking has just been updated! Who do you think deserves the next shot at the title? 🏆 Share your predictions!',
       createdAt: new Date(Date.now() - 20 * 60 * 60 * 1000).toISOString(),
       likes: ['user1', 'user3', 'user4'],
       comments: [
@@ -121,7 +121,7 @@ export const useForumStore = defineStore('forum', () => {
           userId: 'user1',
           userName: 'Alex Johnson',
           userAvatar: 'https://i.pravatar.cc/150?img=12',
-          content: 'Je pense que le #3 a mérité sa chance après 5 victoires',
+          content: 'I think #3 deserved his shot after 5 wins',
           createdAt: new Date(Date.now() - 18 * 60 * 60 * 1000).toISOString()
         },
         {
@@ -130,7 +130,7 @@ export const useForumStore = defineStore('forum', () => {
           userId: 'user3',
           userName: 'Marcus Rodriguez',
           userAvatar: 'https://i.pravatar.cc/150?img=33',
-          content: 'Le champion actuel est trop fort, difficile de le battre !',
+          content: 'The current champion is too strong, hard to beat him!',
           createdAt: new Date(Date.now() - 17 * 60 * 60 * 1000).toISOString()
         }
       ]

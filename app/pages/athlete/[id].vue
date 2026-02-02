@@ -55,7 +55,7 @@
                   </div>
                 </div>
                 <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-linear-to-r from-red-600 to-red-500 text-white text-sm font-bold shadow-lg whitespace-nowrap">
-                  Rang #{{ athlete.ranking }}
+                  {{ $t('athlete.ranking') }} #{{ athlete.ranking }}
                 </div>
               </div>
 
@@ -98,10 +98,10 @@
                             : 'bg-gray-600/20 text-gray-400 border border-gray-600/30'
                       ]"
                     >
-                      {{ athlete.status }}
+                      {{ translateStatus(athlete.status) }}
                     </span>
                     <span class="px-3 py-1 rounded-full text-sm font-semibold bg-blue-600/20 text-blue-400 border border-blue-600/30">
-                      {{ athlete.weightClass }}
+                      {{ translateWeightClass(athlete.weightClass) }}
                     </span>
                     <span
                       v-if="athlete.inCompetition"
@@ -123,7 +123,7 @@
                       <span class="text-xs text-gray-400">{{ $t('athlete.country') }}</span>
                     </div>
                     <p class="text-lg font-bold text-white">
-                      {{ athlete.country }}
+                      {{ translateCountry(athlete.country) }}
                     </p>
                   </div>
                   <div class="bg-gray-800/40 border border-gray-700/50 rounded-xl p-4">
@@ -147,7 +147,7 @@
                       <span class="text-xs text-gray-400">{{ $t('athlete.age') }}</span>
                     </div>
                     <p class="text-lg font-bold text-white">
-                      {{ athlete.age }} ans
+                      {{ $t('athlete.ageValue', { age: athlete.age }) }}
                     </p>
                   </div>
                   <div class="bg-gray-800/40 border border-gray-700/50 rounded-xl p-4">
@@ -156,7 +156,7 @@
                         name="lucide:target"
                         class="w-4 h-4 text-gray-400"
                       />
-                      <span class="text-xs text-gray-400">Classement</span>
+                      <span class="text-xs text-gray-400">{{ $t('athlete.ranking') }}</span>
                     </div>
                     <p class="text-lg font-bold text-red-400">
                       #{{ athlete.ranking }}
@@ -299,7 +299,7 @@
               class="w-5 h-5 text-blue-400"
             />
             <h2 class="text-xl font-bold">
-              Informations complémentaires
+              {{ $t('athlete.additionalInfo') }}
             </h2>
           </div>
 
@@ -313,7 +313,7 @@
                 {{ $t('athlete.weightClass') }}
               </p>
               <p class="text-lg font-semibold text-white">
-                {{ athlete.weightClass }}
+                {{ translateWeightClass(athlete.weightClass) }}
               </p>
             </div>
 
@@ -335,7 +335,7 @@
                       : 'text-gray-400'
                 ]"
               >
-                {{ athlete.status }}
+                {{ translateStatus(athlete.status) }}
               </p>
             </div>
 
@@ -377,10 +377,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAthletesStore } from '~/stores/athletes'
+import { COUNTRY_KEY_MAP, STATUS_KEY_MAP, WEIGHT_CLASS_KEY_MAP, translateI18nValue } from '~/utils/i18nMaps'
 
 const route = useRoute()
 const athletesStore = useAthletesStore()
+const { t: $t } = useI18n()
+
+const translateWeightClass = (value: string) => translateI18nValue(value, $t, WEIGHT_CLASS_KEY_MAP)
+const translateStatus = (value: string) => translateI18nValue(value, $t, STATUS_KEY_MAP)
+const translateCountry = (value?: string) => translateI18nValue(value, $t, COUNTRY_KEY_MAP)
 
 const athleteId = computed(() => route.params.id as string)
 
@@ -390,8 +397,8 @@ const athlete = computed(() => {
 
 const breadcrumbItems = computed(() => [
   { label: $t('common.home'), to: '/dashboard?tab=athletes' },
-  { label: 'Athlètes UFC' },
-  { label: athlete.value?.name || 'Détails' }
+  { label: $t('athlete.athletes') },
+  { label: athlete.value?.name || $t('athlete.title') }
 ])
 
 const winRate = computed(() => {

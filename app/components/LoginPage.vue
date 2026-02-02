@@ -26,7 +26,6 @@
           <span class="text-sm font-medium">{{ $t('common.backHome') }}</span>
         </NuxtLink>
 
-        <!-- Language Switcher -->
         <LanguageSwitcher />
       </div>
     </div>
@@ -154,7 +153,7 @@
               />
             </div>
 
-            <!-- Submit Button -->
+            <!-- Submit -->
             <button
               type="submit"
               :disabled="isLoading"
@@ -185,7 +184,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <Footer />
   </div>
 </template>

@@ -37,7 +37,6 @@
               <span class="hidden sm:inline text-sm font-medium">{{ $t('nav.forum') }}</span>
             </NuxtLink>
 
-            <!-- Language Switcher -->
             <LanguageSwitcher />
 
             <button
@@ -322,7 +321,7 @@
         </p>
       </div>
 
-      <!-- Category Tabs -->
+      <!-- Category -->
       <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
         <button
           v-for="category in categories"
@@ -371,7 +370,7 @@
       </div>
     </section>
 
-    <!-- Support Form Section -->
+    <!-- Support -->
     <section
       id="support-section"
       class="relative z-10 container mx-auto px-4 py-20"
@@ -436,7 +435,6 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <Footer />
 
     <!-- Right Sidebar -->
